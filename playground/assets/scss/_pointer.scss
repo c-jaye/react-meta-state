@@ -1,0 +1,11 @@
+@mixin canHover() {
+  @media (hover: hover) and (pointer: fine) and (update: fast) {
+    @content;
+  }
+}
+
+@mixin cannotHover() {
+  @media not all and (hover: hover) and (pointer: fine) and (update: fast) {
+    @content;
+  }
+}

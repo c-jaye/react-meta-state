@@ -1,0 +1,49 @@
+@use "../../../../playground/assets/scss/utils";
+@use "../../../../playground/assets/scss/aspect";
+@use "../../../../playground/assets/scss/state";
+@use "../../../../playground/assets/scss/pointer";
+
+@include state.states(".dropdownListItem") using ($slot) {
+    @if $slot == "idle" {
+        height: 30px;
+        width: 100%;
+        padding: 0 8px;
+        border: solid 2px transparent;
+        background: #222;
+        user-select: none;
+        transition: all 0.2s ease;
+
+        .text {
+            user-select: none;
+            color: #999;
+            transition: all 0.2s ease;
+        }
+    }
+    @if $slot == "selected" {
+        background: #444;
+    }
+    @if $slot == "hover" {
+        .text {
+            color: #fff;
+        }
+    }
+    @if $slot == "focusWithin" {
+        border: solid 2px #0a0;
+    }
+    @if $slot == "focus" {
+        outline: solid 2px #a00;
+    }
+    @if $slot == "pressed" {
+        background: #666;
+    }
+    @if $slot == "active" {
+        background: #00a;
+    }
+    @if $slot == "highlighted" {
+        background: #777;
+    }
+    @if $slot == "disabled" {
+        user-select: none;
+        background: #fff;
+    }
+}

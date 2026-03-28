@@ -1,0 +1,51 @@
+{
+    "include": [
+        "**/*",
+        "**/.*/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "static",
+        ".vscode"
+    ],
+    "compilerOptions": {
+        "tsBuildInfoFile": "node_modules/.tmp/tsconfig.tsbuildinfo",
+        "baseUrl": ".",
+        "useDefineForClassFields": true,
+        "target": "esnext",
+        "lib": [
+            "ES2024",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "types": [
+            "vite/client"
+        ],
+        "module": "ESNext",
+        "jsx": "react-jsx",
+        "skipLibCheck": true,
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "moduleDetection": "force",
+        "verbatimModuleSyntax": true,
+        "noEmit": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedSideEffectImports": true,
+        "paths": {
+            "~/*": [
+                "playground/components/atoms/*",
+                "playground/components/molecules/*",
+                "playground/components/organisms/*"
+            ],
+            "@/*": [
+                "src/*"
+            ]
+        }
+    }
+}

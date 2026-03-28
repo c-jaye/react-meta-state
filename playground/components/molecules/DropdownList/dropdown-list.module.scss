@@ -1,0 +1,62 @@
+@use "../../../../playground/assets/scss/utils";
+@use "../../../../playground/assets/scss/aspect";
+@use "../../../../playground/assets/scss/state";
+@use "../../../../playground/assets/scss/pointer";
+
+@include state.states(".dropdownList") using ($slot) {
+    @if $slot == "idle" {
+        overflow-y: auto;
+        width: 100%;
+        display: grid;
+        padding: 8px 0;
+        background: #444;
+        background-color: #444;
+        overscroll-behavior: contain;
+        border: solid 2px transparent;
+        border-radius: 0 0 8px 8px;
+        transition: all 0.2s ease;
+
+        height: 0;
+        opacity: 0;
+        max-height: 0;
+
+        @include utils.hide;
+
+        .dropdownListItem {
+            @include utils.hide;
+        }
+    }
+
+    @if $slot == "selected" {
+        background: #999;
+    }
+    @if $slot == "hover" {
+        color: #fff;
+    }
+    @if $slot == "focusWithin" {
+        border: solid 2px #0a0;
+    }
+    @if $slot == "focus" {
+        outline: solid 2px #a00;
+    }
+    @if $slot == "pressed" {
+        background: #555;
+    }
+    @if $slot == "active" {
+        height: 128px;
+        max-height: 128px;
+        opacity: 1;
+
+        @include utils.show;
+
+        .dropdownListItem {
+            @include utils.show;
+        }
+    }
+    @if $slot == "highlighted" {
+        background: #777;
+    }
+    @if $slot == "disabled" {
+        background: #fff;
+    }
+}

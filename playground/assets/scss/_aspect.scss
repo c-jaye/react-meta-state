@@ -1,0 +1,15 @@
+@mixin narrow() {
+	@content;
+}
+
+@mixin square() {
+	@media (min-aspect-ratio: 4/7) {
+		@content;
+	}
+}
+
+@mixin wide() {
+	@media (min-aspect-ratio: 5/4) {
+		@content;
+	}
+}
