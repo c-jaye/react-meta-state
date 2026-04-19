@@ -16,7 +16,6 @@ jobs:
         with:
           version: 10.31.0
           standalone: true
-          cache: true
 
       - name: test
         run: pnpm i
