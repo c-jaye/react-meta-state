@@ -11,14 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: pnpm
-        uses: pnpm/action-setup@v6.0.2
-        with:
-          version: 10.31.0
-
-      - name: test
-        run: pnpm i
-
       - name: node
         uses: actions/setup-node@v6.3.0
         with:
@@ -26,6 +18,9 @@ jobs:
           check-latest: true
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
+
+      - name: test
+        run: pnpm i
 
       - name: test
         run: pnpm run build
