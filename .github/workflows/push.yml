@@ -9,6 +9,9 @@ on:
 jobs:
   push:
     runs-on: ubuntu-latest
+    env:
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      WEBFONTS_API_KEY: ${{ secrets.WEBFONTS_API_KEY }}
     steps:
 
       - name: checkout
