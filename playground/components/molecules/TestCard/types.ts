@@ -1,7 +1,7 @@
 import type { BaseProps } from "@/types/com"
 
 export interface TestCardProps extends BaseProps<"div", never, {}> {
-    title: string
+    // title: string
     caption: string
     description?: string
     imgSrc?: string

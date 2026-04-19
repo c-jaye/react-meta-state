@@ -17,7 +17,7 @@ export type ComponentState<T extends Obj<boolean | undefined> = Obj<boolean | un
 
 export interface ComponentStateProps<
     S extends ComponentState = ComponentState,
-    E extends Ref<HTMLElement | SVGElement> = Ref<HTMLElement | SVGElement>,
+    E extends Ref<HTMLElement> = Ref<HTMLElement>,
 > {
     stateDefinition?: ComponentState<S>
     stateOverride?: { [K in keyof ComponentState<S>]?: boolean | Obj<boolean | undefined> }
@@ -26,12 +26,12 @@ export interface ComponentStateProps<
 }
 
 export type BaseProps<
-    T = {},
+    T = ElementType,
     O extends keyof (T extends ElementType
         ? ComponentPropsWithRef<T>
         : PropsWithChildren<T>
     ) = never,
-    S extends ComponentState = never,
+    S extends ComponentState = {},
 > = {
     "data-theme"?: `${typeof THEME[keyof typeof THEME]}`
 } & Omit<
@@ -44,5 +44,5 @@ export type BaseProps<
             S,
             T extends ElementType
                 ? ComponentPropsWithRef<T>["ref"]
-                : Ref<HTMLElement | SVGElement>>
+                : Ref<HTMLElement>>
         })

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 
 import TestLayout from "."
 
-const meta = {
+const meta: Meta<typeof TestLayout> = {
     title: "Breakpoints/TestLayout",
     component: TestLayout,
     parameters: {
@@ -27,7 +27,7 @@ const meta = {
         unitSquare: "1.1lvh",
         unitWide: "1.2lvh",
     },
-} satisfies Meta<typeof TestLayout>
+}
 
 export default meta
 type Story = StoryObj<typeof meta>

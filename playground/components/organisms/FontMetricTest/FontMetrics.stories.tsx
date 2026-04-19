@@ -4,7 +4,7 @@ import { LOREM_IPSUM_SHORT } from "@/const/strings"
 
 import FontMetrics from "."
 
-const meta = {
+const meta: Meta<typeof FontMetrics> = {
     title: "Type/FontMetrics",
     component: FontMetrics,
     parameters: {
@@ -83,7 +83,7 @@ const meta = {
         showBaseline: true,
         showDescent: false,
     } as const,
-} satisfies Meta<typeof FontMetrics>
+}
 
 export default meta
 type Story = StoryObj<typeof meta>

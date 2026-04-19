@@ -12,10 +12,11 @@ export const TestCard = ({
     logoSrc,
     buttons,
     "data-theme": theme = "cyncly",
+    stateProps,
     className,
     ...props
 }: TestCardProps) => {
-    const { ref } = useComponentState()
+    const { ref } = useComponentState(stateProps)
     const { ref: buttonRef } = useComponentState()
 
     return (
@@ -26,11 +27,19 @@ export const TestCard = ({
             className={classNames(scss.testCard, className)}
         >
             <div className={classNames(scss.hero)}>
-                <img className={classNames(scss.heroImg)} src={imgSrc} alt={title} />
+                <img
+                    className={classNames(scss.heroImg)}
+                    src={imgSrc}
+                    alt={title}
+                />
             </div>
             <div className={classNames(scss.main)}>
                 <div className={classNames(scss.logo)}>
-                    <img className={classNames(scss.logoImg)} src={logoSrc} alt={title} />
+                    <img
+                        className={classNames(scss.logoImg)}
+                        src={logoSrc}
+                        alt={title}
+                    />
                 </div>
                 <div className={classNames("prose", scss.caption)}>
                     <p>{caption}</p>

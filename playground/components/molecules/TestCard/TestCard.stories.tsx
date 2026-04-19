@@ -1,10 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react-vite"
+import type { Meta } from "@storybook/react-vite"
+import { generateStateStory } from "@/configs/storyTools"
 
 import TestCard from "."
 
-const meta = {
+const meta: Meta<typeof TestCard> = {
     title: "Components/Molecules/TestCard",
     component: TestCard,
+    parameters: {
+        layout: "fullscreen",
+    },
     args: {
         title: "Spaces Flex",
         caption: "KITCHEN, BATHROOM",
@@ -16,9 +20,17 @@ const meta = {
             { variant: "tertiary", label: "Product details", to: "https://www.cyncly.com/products/spaces-flex" },
         ],
     },
-} satisfies Meta<typeof TestCard>
+}
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {}
+export const All = generateStateStory(meta, "all")
+export const Idle = generateStateStory(meta, "idle")
+export const Selected = generateStateStory(meta, "selected")
+export const Hover = generateStateStory(meta, "hover")
+export const Active = generateStateStory(meta, "active")
+export const Highlighted = generateStateStory(meta, "highlighted")
+export const FocusWithin = generateStateStory(meta, "focusWithin")
+export const Focus = generateStateStory(meta, "focus")
+export const Pressed = generateStateStory(meta, "pressed")
+export const Disabled = generateStateStory(meta, "disabled")

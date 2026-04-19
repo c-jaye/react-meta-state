@@ -1,11 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react-vite"
+import type { Meta } from "@storybook/react-vite"
+import { generateStateStory } from "@/configs/storyTools"
 import { useState } from "react"
 
 import DropdownListItem from "."
 
-const meta = {
+const meta: Meta<typeof DropdownListItem> = {
     title: "Components/Atoms/DropdownListItem",
     component: DropdownListItem,
+    parameters: {
+        layout: "fullscreen",
+    },
     args: {
         label: "Dropdown List Item",
         value: "",
@@ -38,57 +42,17 @@ const meta = {
             </div>
         )
     },
-} satisfies Meta<typeof DropdownListItem>
+}
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const Idle: Story = {}
-
-export const Selected: Story = {
-    args: {
-        stateProps: { stateOverride: { selected: true } },
-    },
-}
-
-export const Hover: Story = {
-    args: {
-        stateProps: { stateOverride: { hover: true } },
-    },
-}
-
-export const Active: Story = {
-    args: {
-        stateProps: { stateOverride: { active: true } },
-    },
-}
-
-export const Highlighted: Story = {
-    args: {
-        stateProps: { stateOverride: { highlighted: true } },
-    },
-}
-
-export const FocusWithin: Story = {
-    args: {
-        stateProps: { stateOverride: { focusWithin: true } },
-    },
-}
-
-export const Focus: Story = {
-    args: {
-        stateProps: { stateOverride: { focus: true } },
-    },
-}
-
-export const Pressed: Story = {
-    args: {
-        stateProps: { stateOverride: { pressed: true } },
-    },
-}
-
-export const Disabled: Story = {
-    args: {
-        stateProps: { stateOverride: { disabled: true } },
-    },
-}
+export const All = generateStateStory(meta, "all")
+export const Idle = generateStateStory(meta, "idle")
+export const Selected = generateStateStory(meta, "selected")
+export const Hover = generateStateStory(meta, "hover")
+export const Active = generateStateStory(meta, "active")
+export const Highlighted = generateStateStory(meta, "highlighted")
+export const FocusWithin = generateStateStory(meta, "focusWithin")
+export const Focus = generateStateStory(meta, "focus")
+export const Pressed = generateStateStory(meta, "pressed")
+export const Disabled = generateStateStory(meta, "disabled")
