@@ -27,7 +27,6 @@
         "build": "pnpm run test && pnpm run build:bundle",
         "build:storybook": "storybook build -c ./playground/.storybook",
         "build:bundle": "unbuild",
-        "build:snapshots": "vitest --update --run --project=playwright -c vite.test.config.mts",
         "dev": "pnpm run build:bundle && concurrently \"pnpm run dev:storybook\" \"pnpm run dev:verdaccio\"",
         "dev:storybook": "storybook dev -p 6006 -c ./playground/.storybook",
         "dev:verdaccio": "verdaccio --listen 30333",
