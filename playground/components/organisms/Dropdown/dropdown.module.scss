@@ -1,25 +1,39 @@
-@use "../../../../playground/assets/scss/utils";
-@use "../../../../playground/assets/scss/aspect";
-@use "../../../../playground/assets/scss/state";
-@use "../../../../playground/assets/scss/pointer";
+@use "../../../../src/assets/scss/main" as *;
 
-@include state.states(".dropdown") using ($slot) {
+@include buildStates(".dropdown") using ($slot) {
     @if $slot == "idle" {
+        position: relative;
         overflow: visible;
-        height: 40px;
-        width: 120px;
+        height: unit(10);
+        width: unit(24);
         z-index: 1;
         transition: all 0.2s ease;
 
         .button {
+            @include styleBody;
             overflow: visible;
             height: 100%;
             width: 100%;
-            padding: 0 6px;
-            background: #333;
-            color: #999;
-            border: solid 2px transparent;
-            border-radius: 8px;
+            place-items: center start;
+            padding: 0 unit(1.8);
+            background-color: token("bg-idle");
+            color: token("fg-idle");
+            border: solid unit(0.2) transparent;
+            border-radius: unit(1);
+            transition: all 0.2s ease;
+        }
+
+        .term {
+            @include styleCaption;
+            pointer-events: none;
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            width: 100%;
+            place-items: center;
+            padding: 0 unit(1.8);
+            color: token("fg-inverse");
+            opacity: 0;
             transition: all 0.2s ease;
         }
     }
@@ -27,37 +41,49 @@
     @if $slot == "selected" {}
     @if $slot == "hover" {
         .button {
-            color: #fff;
+            color: token("fg-hover");
         }
     }
     @if $slot == "focusWithin" {
         .button {
-            border: solid 2px #0a0;
+            border: solid unit(0.2) token("border-focus-within");
         }
     }
     @if $slot == "focus" {
         .button {
-            outline: solid 2px #a00;
+            outline: solid unit(0.2) token("outline-focus");
         }
     }
     @if $slot == "pressed" {
         .button {
-            background: #555;
+            background-color: token("bg-pressed");
         }
     }
     @if $slot == "active" {
         z-index: 10;
-        filter: drop-shadow(0 0 4px #000);
+        filter: drop-shadow(0 0 unit(0.5) token("shadow-active"));
 
         .button {
-            border-radius: 8px 8px 0 0;
+            border-radius: unit(1) unit(1) 0 0;
+        }
+
+        .term {
+            opacity: 1;
         }
     }
-    @if $slot == "highlighted" {}
+    @if $slot == "highlighted" {
+        .button {
+            background-color: token("bg-highlighted");
+        }
+    }
     @if $slot == "disabled" {
         .button {
-            background: #ccc;
-            color: #888;
+            background-color: token("bg-disabled");
+            color: token("fg-disabled");
+        }
+
+        .term {
+            opacity: 0;
         }
     }
 }

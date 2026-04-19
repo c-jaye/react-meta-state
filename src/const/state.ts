@@ -20,3 +20,9 @@ export const DEFAULT_COMPONENT_STATE: ComponentState = {
     highlighted: false,
     disabled: false,
 }
+
+export const THEME = {
+    Light: "light",
+    Dark: "dark",
+    Cyncly: "cyncly",
+} as const

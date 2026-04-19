@@ -1,0 +1,5 @@
+@use "../tokens/tokens" as *;
+
+@function token($_var: $const-themes) {
+    @return var(--#{$_var});
+}

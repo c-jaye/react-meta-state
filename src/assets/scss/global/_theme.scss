@@ -1,0 +1,15 @@
+@use "../main" as *;
+
+@mixin buildThemes {
+    @each $_themeName, $_theme in $const-themes {
+        :where([data-theme="#{$_themeName}"]) {
+            @each $_tokenName, $_token in $_theme {
+                --#{$_tokenName}: #{$_token};
+            }
+        }
+    }
+}
+
+@mixin includeThemes {
+    @include buildThemes;
+}

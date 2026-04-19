@@ -1,5 +1,6 @@
 import { type ComponentPropsWithRef, type ElementType, type PropsWithChildren, type Ref } from "react"
 import type { Obj } from "./util"
+import type { THEME } from "@/const/state"
 
 export type ComponentState<T extends Obj<boolean | undefined> = Obj<boolean | undefined>> = Obj<boolean | undefined> & {
     selected?: boolean | undefined
@@ -19,7 +20,7 @@ export interface ComponentStateProps<
     E extends Ref<HTMLElement | SVGElement> = Ref<HTMLElement | SVGElement>,
 > {
     stateDefinition?: ComponentState<S>
-    stateOverride?: { [K in keyof ComponentState<S>]: Obj<boolean | undefined> }
+    stateOverride?: { [K in keyof ComponentState<S>]?: boolean | Obj<boolean | undefined> }
     onStateChange?: (state: ComponentState<S>, key: string) => void
     ref?: E
 }
@@ -31,7 +32,9 @@ export type BaseProps<
         : PropsWithChildren<T>
     ) = never,
     S extends ComponentState = never,
-> = Omit<
+> = {
+    "data-theme"?: `${typeof THEME[keyof typeof THEME]}`
+} & Omit<
     (T extends ElementType
         ? ComponentPropsWithRef<T>
         : PropsWithChildren<T>

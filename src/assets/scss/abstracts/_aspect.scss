@@ -1,0 +1,15 @@
+@use "sass:map";
+
+@use "../tokens/tokens" as *;
+
+$v-aspectUnit: var(--aspect-unit, 1lvh);
+
+@mixin forAspect($_aspect: $const-aspects) {
+	@media (min-aspect-ratio: #{map.get(map.get($const-aspects, $_aspect), "ratio")}) {
+		@content;
+	}
+};
+
+@function unit($_value) {
+    @return calc($v-aspectUnit * #{$_value});
+};

@@ -1,0 +1,15 @@
+@use "sass:map";
+
+$const-fonts: (
+    OpenSansBold: (
+        family: Open Sans,
+        weight: 600,
+        style: normal,
+        ascent: 106.884766,
+        capHeight: 71.386719,
+        exHeight: 53.515625,
+        descent: 29.296875,
+        lineGap: 0,
+        size: 100,
+    ),
+);

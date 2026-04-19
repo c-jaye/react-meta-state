@@ -1,10 +1,12 @@
-@mixin canHover() {
+@use "../tokens/tokens" as *;
+
+@mixin canHover {
   @media (hover: hover) and (pointer: fine) and (update: fast) {
     @content;
   }
 }
 
-@mixin cannotHover() {
+@mixin cannotHover {
   @media not all and (hover: hover) and (pointer: fine) and (update: fast) {
     @content;
   }

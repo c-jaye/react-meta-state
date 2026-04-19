@@ -1,0 +1,56 @@
+@use "../tokens/tokens" as *;
+@use "aspect" as *;
+
+$v-fontFamily: var(--font-family, "Open Sans", sans-serif);
+$v-fontWeight: var(--font-weight, 600);
+$v-fontStyle: var(--font-style, normal);
+
+$v-fmAscent: var(--fm-ascent, 106.884766);
+$v-fmCapHeight: var(--fm-cap-height, 71.386719);
+$v-fmExHeight: var(--fm-ex-height, 53.515625);
+$v-fmDescent: var(--fm-descent, 29.296875);
+$v-fmLineGap: var(--fm-line-gap, 0);
+$v-fmSize: var(--fm-size, 100);
+
+$v-fontSize: var(--font-size, 4);
+$v-fontSpacing: var(--font-spacing, 0);
+$v-fontLineHeight: var(--font-line-height, 1);
+$v-fontUnit: var(--font-unit, $v-aspectUnit);
+
+$calc_sizeModifier: calc(1 / $v-fmSize * $v-fontSize);
+$calc_fontSize: calc($v-fontSize * $v-fontUnit);
+$calc_additionalLineHeight: calc(($v-fontLineHeight - 1) * #{$calc_fontSize});
+$calc_fullLineHeight: calc(#{$calc_fontSize} + #{$calc_additionalLineHeight});
+$calc_lineOffsetTop: calc(($v-fmAscent - $v-fmCapHeight) * $v-fontUnit * #{$calc_sizeModifier});
+$calc_lineOffsetBottom: calc($v-fmDescent * $v-fontUnit * #{$calc_sizeModifier});
+$calc_fontOffsetTop: calc((#{$calc_lineOffsetTop} + #{$calc_additionalLineHeight}) * -0.5);
+$calc_fontOffsetBottom: calc((#{$calc_lineOffsetBottom} + #{$calc_additionalLineHeight}) * -1);
+$calc_letterSpacing: calc($v-fontSpacing * $v-fontUnit * #{$calc_sizeModifier});
+$calc_lineHeight: calc($v-fontLineHeight);
+
+@mixin defineFontStyle(
+  $_size: 4,
+  $_lineHeight: 1,
+  $_spacing: 0,
+  $_fontUnit: $v-aspectUnit,
+) {
+  --font-size: #{$_size};
+  --font-line-height: #{$_lineHeight};
+  --font-spacing: #{$_spacing};
+  --font-unit: #{$_fontUnit};
+
+  @content;
+}
+
+@mixin useFontFace($_fontFace) {
+  --font-family: var(--#{$_fontFace}-font-family);
+  --font-weight: var(--#{$_fontFace}-font-weight);
+  --font-style: var(--#{$_fontFace}-font-style);
+
+  --fm-ascent: var(--#{$_fontFace}-fm-ascent);
+  --fm-cap-height: var(--#{$_fontFace}-fm-cap-height);
+  --fm-ex-height: var(--#{$_fontFace}-fm-ex-height);
+  --fm-descent: var(--#{$_fontFace}-fm-descent);
+  --fm-line-gap: var(--#{$_fontFace}-fm-line-gap);
+  --fm-size: var(--#{$_fontFace}-fm-size);
+}

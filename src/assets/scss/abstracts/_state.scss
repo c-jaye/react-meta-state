@@ -1,0 +1,45 @@
+@use "../tokens/tokens" as *;
+
+@mixin selected($_selector) {
+    #{$_selector}:global(.selected) { @content; }
+}
+
+@mixin hover($_selector) {
+    #{$_selector}:global(.hover) { @content; }
+}
+
+@mixin active($_selector) {
+    #{$_selector}:global(.active) { @content; }
+}
+
+@mixin highlighted($_selector) {
+    #{$_selector}:global(.highlighted) { @content; }
+}
+
+@mixin focusWithin($_selector) {
+    #{$_selector}:global(.focusWithin) { @content; }
+}
+
+@mixin focus($_selector) {
+    #{$_selector}:global(.focus) { @content; }
+}
+
+@mixin pressed($_selector) {
+    #{$_selector}:global(.pressed) { @content; }
+}
+
+@mixin disabled($_selector) {
+    #{$_selector}:global(.disabled) { @content; }
+}
+
+@mixin buildStates($_selector: "*") {
+    #{$_selector} { @content("idle"); }
+    @include selected($_selector) { @content("selected"); }
+    @include hover($_selector) { @content("hover"); }
+    @include active($_selector) { @content("active"); }
+    @include highlighted($_selector) { @content("highlighted"); }
+    @include focusWithin($_selector) { @content("focusWithin"); }
+    @include focus($_selector) { @content("focus"); }
+    @include pressed($_selector) { @content("pressed"); }
+    @include disabled($_selector) { @content("disabled"); }
+}

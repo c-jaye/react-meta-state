@@ -1,0 +1,20 @@
+@use "sass:map";
+
+@use "../main" as *;
+
+@mixin buildAspects {
+	--aspect-unit: #{$v-aspectUnit};
+
+	@each $_aspect, $_values in $const-aspects {
+		--aspect-unit-#{$_aspect}: #{map.get($_values, "unit")};
+
+		@include forAspect($_aspect) {
+			--aspect-unit: var(--aspect-unit-#{$_aspect});
+			@content;
+		}
+	}
+};
+
+@mixin includeAspects {
+	@include buildAspects;
+};

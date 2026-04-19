@@ -1,49 +1,50 @@
-@use "../../../../playground/assets/scss/utils";
-@use "../../../../playground/assets/scss/aspect";
-@use "../../../../playground/assets/scss/state";
-@use "../../../../playground/assets/scss/pointer";
+@use "../../../../src/assets/scss/main" as *;
 
-@include state.states(".dropdownListItem") using ($slot) {
+@include buildStates(".dropdownListItem") using ($slot) {
     @if $slot == "idle" {
-        height: 30px;
+        display: flex;
+        align-items: center;
+        height: unit(8);
         width: 100%;
-        padding: 0 8px;
-        border: solid 2px transparent;
-        background: #222;
+        padding: 0 unit(1.8);
+        border: solid unit(0.2) transparent;
+        background: token("bg-idle");
         user-select: none;
         transition: all 0.2s ease;
 
         .text {
+            @include styleBody;
             user-select: none;
-            color: #999;
+            pointer-events: none;
+            color: token("fg-idle");
             transition: all 0.2s ease;
         }
     }
     @if $slot == "selected" {
-        background: #444;
+        background: token("bg-selected");
     }
     @if $slot == "hover" {
         .text {
-            color: #fff;
+            color: token("fg-hover");
         }
     }
     @if $slot == "focusWithin" {
-        border: solid 2px #0a0;
+        border: solid unit(0.2) token("border-focusWithin");
     }
     @if $slot == "focus" {
-        outline: solid 2px #a00;
+        outline: solid unit(0.2) token("border-focus");
     }
     @if $slot == "pressed" {
-        background: #666;
+        background: token("bg-pressed");
     }
     @if $slot == "active" {
-        background: #00a;
+        background: token("bg-active");
     }
     @if $slot == "highlighted" {
-        background: #777;
+        background: token("bg-highlighted");
     }
     @if $slot == "disabled" {
         user-select: none;
-        background: #fff;
+        background: token("bg-disabled");
     }
 }

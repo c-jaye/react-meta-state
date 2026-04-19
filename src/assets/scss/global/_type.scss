@@ -1,0 +1,124 @@
+@use "sass:list";
+@use "sass:map";
+
+@use "../main" as *;
+
+@mixin buildBase {
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-smooth: subpixel-antialiased;
+  text-rendering: optimizeLegibility;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-weight: inherit;
+  font-style: inherit;
+
+  font-size: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+
+  font-synthesis: weight style small-caps position;
+  font-variant: normal;
+  font-feature-settings: normal;
+  font-kerning: normal;
+  font-optical-sizing: auto;
+  font-variation-settings: normal;
+  font-size-adjust: none;
+  font-language-override: normal;
+  font-stretch: normal;
+
+  text-decoration-skip-ink: auto;
+  text-decoration-skip-ink: all;
+  text-align: start;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  white-space: normal;
+  white-space-collapse: collapse;
+  line-break: normal;
+  word-break: normal;
+  word-spacing: normal;
+  hyphenate-character: auto;
+}
+
+@mixin buildProse {
+  :where(*) {
+    font-family: $v-fontFamily;
+    font-weight: $v-fontWeight;
+    font-style: $v-fontStyle;
+  }
+
+  :where(.prose) {
+    overflow: visible;
+    width: 100%;
+    display: grid;
+    place-items: start stretch;
+
+    & * {
+      overflow-inline: visible;
+      display: block;
+      padding-top: $calc_lineOffsetTop;
+      padding-bottom: $calc_lineOffsetBottom;
+
+      margin-bottom: $calc_fontOffsetBottom;
+      translate: 0 $calc_fontOffsetTop;
+
+      font-size: $calc_fontSize;
+      letter-spacing: $calc_letterSpacing;
+      line-height: $calc_lineHeight;
+    }
+
+    &.unpadded {
+      & * {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+
+    &.legacy {
+      & * {
+        padding-top: 0;
+        padding-bottom: 0;
+
+        margin-bottom: 0;
+        translate: 0;
+      }
+    }
+  }
+}
+
+@mixin buildFonts {
+  @each $_font, $_metrics in $const-fonts {
+    --#{$_font}-font-family: #{map.get($_metrics, family)};
+    --#{$_font}-font-weight: #{map.get($_metrics, weight)};
+    --#{$_font}-font-style: #{map.get($_metrics, style)};
+
+    --#{$_font}-fm-ascent: #{map.get($_metrics, ascent)};
+    --#{$_font}-fm-cap-height: #{map.get($_metrics, capHeight)};
+    --#{$_font}-fm-ex-height: #{map.get($_metrics, exHeight)};
+    --#{$_font}-fm-descent: #{map.get($_metrics, descent)};
+    --#{$_font}-fm-line-gap: #{map.get($_metrics, lineGap)};
+    --#{$_font}-fm-size: #{map.get($_metrics, size)};
+  }
+
+  $_firstFont: list.nth(map.keys($const-fonts), 1);
+
+  @include useFontFace($_firstFont);
+}
+
+@mixin includeType {
+  @include buildBase;
+  @include buildProse;
+  @include buildFonts;
+}

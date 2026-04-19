@@ -1,62 +1,65 @@
-@use "../../../../playground/assets/scss/utils";
-@use "../../../../playground/assets/scss/aspect";
-@use "../../../../playground/assets/scss/state";
-@use "../../../../playground/assets/scss/pointer";
+@use "../../../../src/assets/scss/main" as *;
 
-@include state.states(".dropdownList") using ($slot) {
+@include buildStates(".dropdownList") using ($slot) {
     @if $slot == "idle" {
         overflow-y: auto;
         width: 100%;
         display: grid;
-        padding: 8px 0;
-        background: #444;
-        background-color: #444;
+        padding: unit(1.8) 0;
+        background-color: token("bg-idle");
         overscroll-behavior: contain;
-        border: solid 2px transparent;
-        border-radius: 0 0 8px 8px;
+        border: solid unit(0.2) transparent;
+        border-radius: 0 0 unit(2) unit(2);
         transition: all 0.2s ease;
 
         height: 0;
         opacity: 0;
         max-height: 0;
 
-        @include utils.hide;
+        pointer-events: none;
+        user-select: none;
+        opacity: 0;
 
         .dropdownListItem {
-            @include utils.hide;
+            pointer-events: none;
+            user-select: none;
+            opacity: 0;
         }
     }
 
     @if $slot == "selected" {
-        background: #999;
+        background-color: token("bg-selected");
     }
     @if $slot == "hover" {
-        color: #fff;
+        color: token("fg-hover");
     }
     @if $slot == "focusWithin" {
-        border: solid 2px #0a0;
+        border: solid unit(0.2) token("border-focus-within");
     }
     @if $slot == "focus" {
-        outline: solid 2px #a00;
+        outline: solid unit(0.2) token("outline-focus");
     }
     @if $slot == "pressed" {
-        background: #555;
+        background-color: token("bg-pressed");
     }
     @if $slot == "active" {
-        height: 128px;
-        max-height: 128px;
+        height: unit(27.6);
+        max-height: unit(27.6);
+        
+        pointer-events: all;
+        user-select: all;
         opacity: 1;
 
-        @include utils.show;
-
         .dropdownListItem {
-            @include utils.show;
+            pointer-events: all;
+            user-select: all;
+            opacity: 1;
         }
     }
     @if $slot == "highlighted" {
-        background: #777;
+        background-color: token("bg-highlighted");
     }
     @if $slot == "disabled" {
-        background: #fff;
+        background-color: token("bg-disabled");
     }
 }

@@ -1,9 +1,0 @@
-@mixin hide {
-    display: none;
-    user-select: none;
-}
-
-@mixin show {
-    display: block;
-    user-select: all;
-}

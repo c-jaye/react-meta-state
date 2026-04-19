@@ -1,0 +1,16 @@
+@use "sass:map";
+
+$const-aspects: (
+    narrow: (
+        ratio: "9/32",
+        unit: 1lvh,
+    ),
+    square: (
+        ratio: "2/3",
+        unit: 1.1lvh,
+    ),
+    wide: (
+        ratio: "4/3",
+        unit: 1.2lvh,
+    ),
+);
