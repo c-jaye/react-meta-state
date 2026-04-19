@@ -21,7 +21,6 @@
             "DOM.Iterable"
         ],
         "types": [
-            "vite/client",
             "./env.d.ts"
         ],
         "module": "ESNext",
