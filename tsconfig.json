@@ -21,7 +21,6 @@
             "DOM.Iterable"
         ],
         "types": [
-            "vite/client",
             "./src/defs/env.d.ts",
             "./src/defs/vite-env.d.ts"
         ],
