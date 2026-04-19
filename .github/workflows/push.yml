@@ -14,9 +14,9 @@ jobs:
       - name: pnpm
         uses: pnpm/action-setup@v6.0.2
         with:
+          version: 10.31.0
           standalone: true
           cache: true
-          package_json_file: package.json
 
       - name: test
         run: pnpm i
