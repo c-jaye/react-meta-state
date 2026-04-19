@@ -1,0 +1,123 @@
+@use "../../../../src/assets/scss/main" as *;
+
+@include buildStates(".button") using ($slot) {
+    @if $slot == "idle" {
+        cursor: pointer;
+        height: unit(5);
+        place-items: center;
+        @include styleCynclyButton;
+        border-radius: unit(2.5);
+        transition: all 0.2s ease;
+
+        span {
+            pointer-events: none;
+        }
+
+        &.primary {
+            background: token("bg-blue");
+            color: token("text-inverse");
+        }
+
+        &.secondary {
+
+        }
+
+        &.tertiary {
+            color: token("text-primary");
+            text-decoration: underline;
+        }
+    }
+    @if $slot == "selected" {}
+    @if $slot == "hover" {
+        &.primary {
+            background: token("bg-blue-hover");
+            box-shadow: 0 unit(0.4) unit(0.8) token("bg-shadow");
+        }
+
+        &.tertiary {
+            text-decoration-color: token("bg-blue");
+        }
+    }
+    @if $slot == "focusWithin" {}
+    @if $slot == "focus" {
+        outline: solid unit(0.4) token("outline-focus");
+    }
+    @if $slot == "pressed" {}
+    @if $slot == "active" {}
+    @if $slot == "highlighted" {}
+    @if $slot == "disabled" {}
+}
+
+@include buildStates(".testCard") using ($slot) {
+    @if $slot == "idle" {
+        overflow: hidden;
+        // height: unit(48) ;
+        width: unit(48);
+        background: token("bg-stone");
+        border: solid unit(0.2) token("border-light");
+        border-radius: unit(2);
+        transition: all 0.2s ease;
+
+        .hero {
+            overflow: hidden;
+            height: unit(32);
+            width: 100%;
+        }
+
+        .heroImg {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            aspect-ratio: 16 / 9;
+        }
+
+        .main {
+            padding: unit(4);
+        }
+
+        .logo {
+            height: unit(6);
+            width: unit(6);
+        }
+
+        .logoImg {
+            height: 100%;
+            width: 100%;
+        }
+
+        .caption {
+            @include styleCynclyCaption;
+            margin-top: unit(1.2);
+        }
+
+        .title {
+            @include styleCynclyH3;
+            margin-top: unit(1.2);
+        }
+
+        .description {
+            @include styleCynclyBody;
+            margin-top: unit(1.6);
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-auto-rows: max-content;
+            place-items: center;
+            gap: unit(1);
+            margin-top: unit(1.6);
+        }
+    }
+
+    @if $slot == "selected" {}
+    @if $slot == "hover" {
+        box-shadow: 0 unit(0.4) unit(0.8) token("bg-shadow");
+    }
+    @if $slot == "focusWithin" {}
+    @if $slot == "focus" {}
+    @if $slot == "pressed" {}
+    @if $slot == "active" {}
+    @if $slot == "highlighted" {}
+    @if $slot == "disabled" {}
+}
