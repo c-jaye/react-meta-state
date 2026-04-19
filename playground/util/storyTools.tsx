@@ -5,7 +5,7 @@ import type { FC } from "react"
 import type { KeyOf } from "@/types/util"
 import { deepMerge } from "@/util/merge"
 import { keysOf } from "@/util/helpers"
-import { sentenceCase } from "@/util/convert"
+import { titleCase } from "@/util/convert"
 import { unit } from "@/assets/tokens"
 
 export function generateStateStory<T extends BaseProps>(
@@ -37,7 +37,7 @@ export function generateStateStory<T extends BaseProps>(
                         {keysOf(DEFAULT_COMPONENT_STATE).map(s => (
                             <>
                                 <label className="prose">
-                                    <span>{sentenceCase(s)}</span>
+                                    <span>{titleCase(s)}</span>
                                 </label>
                                 <Component
                                     {...args}
