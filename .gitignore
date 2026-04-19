@@ -18,7 +18,6 @@ logs
 *.log
 
 .env
-chromatic.config.json
 
 test-results.xml
 
