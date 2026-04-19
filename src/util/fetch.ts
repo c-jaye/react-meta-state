@@ -23,9 +23,5 @@ export function fetchAny(
 ) {
     return fetch(url, deepMerge({
         method,
-        headers: {
-            "Content-Type": "*/*",
-            "Accept": "*/*",
-        },
     }, options))
 }
