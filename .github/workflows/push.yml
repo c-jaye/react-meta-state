@@ -14,11 +14,9 @@ jobs:
       - name: pnpm
         uses: pnpm/action-setup@v6.0.2
         with:
-          version: 10.31
           standalone: true
-
-      - name: ci
-        run: pnpm ci
+          run_install: true
+          cache: true
 
       - name: node
         uses: actions/setup-node@v6.3.0
