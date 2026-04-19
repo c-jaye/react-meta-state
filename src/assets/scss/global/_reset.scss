@@ -163,8 +163,8 @@
         inset-inline-end: auto;
         inset-inline-start: auto;
         isolation: auto;
-        position: static;
-        z-index: auto;
+        position: relative;
+        z-index: -1;
         overlay: none;
 
         // Transform
