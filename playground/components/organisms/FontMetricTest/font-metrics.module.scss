@@ -1,0 +1,30 @@
+@use "../../../../src/assets/scss/main" as *;
+
+.fontMetrics {
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: token("bg-idle");
+    color: token("fg-idle");
+}
+
+label {
+    @include styleBody;
+}
+
+input {
+    @include styleBody;
+}
+
+.gridH {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    grid-template-rows: max-content;
+    gap: 16px;
+    padding: 0 16px;
+
+    & * {
+        width: 100%;
+    }
+}
