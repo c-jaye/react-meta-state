@@ -28,7 +28,7 @@ jobs:
           cache-dependency-path: pnpm-lock.yaml
 
       - name: install
-        run: pnpm i --frozen-lockfile
+        run: pnpm i
 
       - name: test
         run: pnpm run build

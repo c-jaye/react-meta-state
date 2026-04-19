@@ -16,7 +16,7 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@chromatic-com/storybook':
-        specifier: ^5.1.1
+        specifier: ^5.1.2
         version: 5.1.2(storybook@10.3.5(@testing-library/dom@10.4.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@storybook/addon-a11y':
         specifier: ^10.3.5
@@ -85,7 +85,7 @@ importers:
         specifier: ^4.16.2
         version: 4.16.2(@typescript-eslint/utils@8.58.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react-hooks:
-        specifier: ^7.0.1
+        specifier: ^7.1.1
         version: 7.1.1(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-storybook:
         specifier: 10.3.5
@@ -118,13 +118,13 @@ importers:
         specifier: ~5.9.3
         version: 5.9.3
       typescript-eslint:
-        specifier: ^8.58.1
+        specifier: ^8.58.2
         version: 8.58.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
       unbuild:
         specifier: ^3.6.1
         version: 3.6.1(sass@1.99.0)(typescript@5.9.3)
       verdaccio:
-        specifier: ^6.5.0
+        specifier: ^6.5.2
         version: 6.5.2(typanion@3.14.0)
       vite:
         specifier: ^8.0.8
