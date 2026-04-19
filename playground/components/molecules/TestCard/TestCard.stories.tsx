@@ -1,7 +1,8 @@
 import type { Meta } from "@storybook/react-vite"
-import { generateStateStory } from "@/configs/storyTools"
+import { generateStateStory } from "playground/util/storyTools"
 
 import TestCard from "."
+import { unit } from "@/assets/tokens"
 
 const meta: Meta<typeof TestCard> = {
     title: "Components/Molecules/TestCard",
@@ -20,12 +21,27 @@ const meta: Meta<typeof TestCard> = {
             { variant: "tertiary", label: "Product details", to: "https://www.cyncly.com/products/spaces-flex" },
         ],
     },
+    render: args => (
+        <div style={{
+            overflow: "visible",
+            display: "grid",
+            gridAutoFlow: "column",
+            placeItems: "start",
+            gap: unit(4),
+            padding: unit(6),
+        }}
+        >
+            <TestCard {...args} />
+            <TestCard {...args} />
+            <TestCard {...args} />
+        </div>
+    ),
 }
 
 export default meta
 
-export const All = generateStateStory(meta, "all")
 export const Idle = generateStateStory(meta, "idle")
+export const All = generateStateStory(meta, "all")
 export const Selected = generateStateStory(meta, "selected")
 export const Hover = generateStateStory(meta, "hover")
 export const Active = generateStateStory(meta, "active")

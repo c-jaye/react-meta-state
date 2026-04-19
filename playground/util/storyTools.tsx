@@ -1,0 +1,60 @@
+import type { Meta, StoryObj } from "@storybook/react-vite"
+import type { BaseProps } from "@/types/com"
+import { DEFAULT_COMPONENT_STATE } from "@/const/state"
+import type { FC } from "react"
+import type { KeyOf } from "@/types/util"
+import { deepMerge } from "@/util/merge"
+import { keysOf } from "@/util/helpers"
+import { sentenceCase } from "@/util/convert"
+import { unit } from "@/assets/tokens"
+
+export function generateStateStory<T extends BaseProps>(
+    meta: Meta<T>,
+    state?: "all" | "idle" | KeyOf<typeof DEFAULT_COMPONENT_STATE>,
+): StoryObj<typeof meta> {
+    return {
+        render: state === "all"
+            ? (args: T) => {
+                const Component = meta.component as FC<T>
+                return (
+                    <div style={{
+                        display: "grid",
+                        height: "100%",
+                        width: "max-content",
+                        gridAutoFlow: "column",
+                        gridAutoColumns: "1fr",
+                        gridTemplateRows: "max-content max-content",
+                        placeItems: "start",
+                        gap: unit(4),
+                        padding: unit(4),
+                        overflow: "visible",
+                    }}
+                    >
+                        <label className="prose">
+                            <span>Idle</span>
+                        </label>
+                        <Component {...args} />
+                        {keysOf(DEFAULT_COMPONENT_STATE).map(s => (
+                            <>
+                                <label className="prose">
+                                    <span>{sentenceCase(s)}</span>
+                                </label>
+                                <Component
+                                    {...args}
+                                    stateProps={{ stateOverride: { [s]: true } }}
+                                />
+                            </>
+                        ))}
+                    </div>
+                )
+            }
+            : meta.render,
+        args: state && !["all", "idle"].includes(state)
+            ? deepMerge(meta.args, {
+                stateProps: {
+                    stateOverride: { [state]: true },
+                },
+            })
+            : meta.args,
+    } as StoryObj<typeof meta>
+}

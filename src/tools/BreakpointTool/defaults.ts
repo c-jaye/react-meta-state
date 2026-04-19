@@ -23,8 +23,8 @@ export const VIEWPORTS = {
     "Narrow": {
         name: "Narrow",
         metrics: {
-            width: "240px",
-            height: "720px",
+            width: "180px",
+            height: "540px",
             w: 1,
             h: 3,
         },
@@ -33,8 +33,8 @@ export const VIEWPORTS = {
     "Square": {
         name: "Square",
         metrics: {
-            width: "480px",
-            height: "720px",
+            width: "360px",
+            height: "540px",
             w: 2,
             h: 3,
         },
@@ -43,8 +43,8 @@ export const VIEWPORTS = {
     "Wide": {
         name: "Wide",
         metrics: {
-            width: "960px",
-            height: "720px",
+            width: "720px",
+            height: "540px",
             w: 4,
             h: 3,
         },
@@ -53,8 +53,8 @@ export const VIEWPORTS = {
     "Ultrawide": {
         name: "Ultrawide",
         metrics: {
-            width: "960px",
-            height: "320px",
+            width: "1620px",
+            height: "540px",
             w: 3,
             h: 1,
         },

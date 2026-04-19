@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { fontFaceArgTypes, fontMetricsArgTypes, fontTypeArgTypes } from "@/configs/storyArgs"
+import { fontFaceArgTypes, fontMetricsArgTypes, fontTypeArgTypes } from "playground/util/storyArgTypes"
 import { LOREM_IPSUM } from "@/const/strings"
 
 import FontMetricGrid, { type FontMetricGridProps } from "."

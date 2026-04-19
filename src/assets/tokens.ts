@@ -26,7 +26,7 @@ export interface Tokens extends Obj {
 
 export const aspects = {
     narrow: {
-        ratio: "9/32",
+        ratio: "9/64",
         unit: "1lvh",
     },
     square: {

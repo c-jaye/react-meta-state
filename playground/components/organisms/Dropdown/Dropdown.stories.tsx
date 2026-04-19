@@ -1,5 +1,6 @@
 import type { Meta } from "@storybook/react-vite"
-import { generateStateStory } from "@/configs/storyTools"
+import { generateStateStory } from "playground/util/storyTools"
+import { unit } from "@/assets/tokens"
 
 import Dropdown from "."
 
@@ -22,10 +23,12 @@ const meta: Meta<typeof Dropdown> = {
     render: (args) => {
         return (
             <div style={{
-                display: "grid",
-                gap: "24px",
-                gridAutoFlow: "column",
                 overflow: "visible",
+                display: "grid",
+                gridAutoFlow: "column",
+                placeItems: "start",
+                gap: unit(4),
+                padding: unit(6),
             }}
             >
                 <Dropdown {...args} />
@@ -38,8 +41,8 @@ const meta: Meta<typeof Dropdown> = {
 
 export default meta
 
-export const All = generateStateStory(meta, "all")
 export const Idle = generateStateStory(meta, "idle")
+export const All = generateStateStory(meta, "all")
 export const Selected = generateStateStory(meta, "selected")
 export const Hover = generateStateStory(meta, "hover")
 export const Active = generateStateStory(meta, "active")
