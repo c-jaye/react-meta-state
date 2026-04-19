@@ -97,7 +97,13 @@
 
         .description {
             @include styleCynclyBody;
-            margin-top: unit(1.6);
+            
+            @include canHover {
+                margin-top: unit(1.6);
+                max-height: 0;
+                opacity: 0;
+                transition: all 0.2s ease;
+            }
         }
 
         .buttons {
@@ -113,6 +119,14 @@
     @if $slot == "selected" {}
     @if $slot == "hover" {
         box-shadow: 0 unit(0.4) unit(0.8) token("bg-shadow");
+
+        .description {
+            @include canHover {
+                max-height: unit(24);
+                opacity: 1;
+            }
+        }
+
     }
     @if $slot == "focusWithin" {}
     @if $slot == "focus" {}
