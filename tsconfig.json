@@ -22,7 +22,8 @@
         ],
         "types": [
             "vite/client",
-            "./env.d.ts"
+            "./src/defs/env.d.ts",
+            "./src/defs/vite-env.d.ts"
         ],
         "module": "ESNext",
         "jsx": "react-jsx",
