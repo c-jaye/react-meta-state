@@ -1,0 +1,5 @@
+export const LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+export const LOREM_IPSUM_SHORT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+export const QUICK_BROWN_FOX = "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs."
+export const QUICK_BROWN_FOX_SHORT = "The quick brown fox jumps over the lazy dog."
+export const FONT_TEST_CHARACTERS = "XxHgÅfyjpqlÁÉgjpqy"

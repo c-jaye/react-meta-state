@@ -21,3 +21,8 @@ logs
 chromatic.config.json
 
 test-results.xml
+
+.husky/*
+!.husky/pre-push
+
+chromatic-build-*.xml

@@ -21,3 +21,5 @@ export type KeyOf<T> = keyof T & string
 export type PartialObj<T> = Partial<T> & (T extends Obj<unknown> ? Obj<NonNullable<T[keyof T]>> : {})
 export type ConvertEnums<T> = { [K in keyof T]: T[K] extends string | number | undefined ? `${NonNullable<T[K]>}` : T[K] }
 export type Mutable<T> = { -readonly [K in keyof T]: T[K] }
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [key in K]?: Partial<T[key]> }
+export interface LabelValue<T = unknown> { label: string, value: T }

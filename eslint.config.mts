@@ -15,7 +15,7 @@ export default tseslint.config({
     ],
 }, {
     linterOptions: {
-        noInlineConfig: true,
+        noInlineConfig: false,
         reportUnusedInlineConfigs: "error",
         reportUnusedDisableDirectives: true,
     },

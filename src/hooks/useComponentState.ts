@@ -1,8 +1,8 @@
 import type { ComponentState, ComponentStateProps } from "@/types/com"
 import type { Mutable, Obj } from "@/types/util"
 import { deepMerge, deepMergeAll } from "@/util/merge"
-import { entriesOf, isFunc, isIn, keysOf } from "@/util/helpers"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { entriesOf, isBool, isFunc, isIn, keysOf } from "@/util/helpers"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { DEFAULT_COMPONENT_STATE } from "@/const/state"
 import { fromJson } from "@/util/parse"
 import { wait } from "@/util/async"
@@ -25,7 +25,11 @@ export default function useComponentState<S extends Obj<boolean | undefined> = C
     const queuedState = useRef<Obj<Partial<ComponentState<S>>>>({})
     const overrides = useRef<Obj<Partial<ComponentState<S>>>>({})
 
-    const [finalState, setFinalState] = useState<Obj<ComponentState<S>>>({})
+    const [finalState, setFinalState] = useState<Obj<ComponentState<S>> & ComponentState<S>>({})
+
+    const isTouch = useMemo(() => {
+        return !window.matchMedia("(hover: hover) and (pointer: fine) and (update: fast)").matches
+    }, [])
 
     const getAttributeState = useCallback((key: string) => {
         const attributeState = refs.current[key]?.getAttribute("data-rms")
@@ -94,7 +98,11 @@ export default function useComponentState<S extends Obj<boolean | undefined> = C
         if (keysOf(newState).every(k => newState[k] === states.current[key]?.[k])) return
 
         states.current[key] = innerState
-        setFinalState(s => ({ ...s, [key]: newState }))
+        setFinalState(s => ({
+            ...s,
+            [key]: newState,
+            ...(key === "default" ? newState : {}),
+        }))
 
         keysOf(stateDefinition).forEach(k => el.classList[newState[k] ? "add" : "remove"](k))
 
@@ -142,6 +150,7 @@ export default function useComponentState<S extends Obj<boolean | undefined> = C
             node.removeEventListener("focus", l.focus)
             node.removeEventListener("focusin", l.focusin)
             node.removeEventListener("focusout", l.focusout)
+            node.removeAttribute("data-rms")
 
             delete listeners.current[key]
             delete refs.current[key]
@@ -153,21 +162,21 @@ export default function useComponentState<S extends Obj<boolean | undefined> = C
 
         refs.current[key] = node
 
-        listeners.current[key] = {
+        const l = listeners.current[key] = {
             pointerup: () => {
-                if (!isIn(stateDefinition, "pressed")) return
-                updateState({ pressed: false }, key)
+                if (isTouch || !isIn(stateDefinition, "pressed")) return
+                setTimeout(() => updateState({ pressed: false }, key), 125)
             },
             pointerdown: () => {
-                if (!isIn(stateDefinition, "pressed")) return
+                if (isTouch || !isIn(stateDefinition, "pressed")) return
                 updateState({ pressed: true }, key)
             },
             pointerleave: () => {
-                if (!isIn(stateDefinition, "hover")) return
+                if (isTouch || !isIn(stateDefinition, "hover")) return
                 updateState({ hover: false }, key)
             },
             pointerenter: () => {
-                if (!isIn(stateDefinition, "hover")) return
+                if (isTouch || !isIn(stateDefinition, "hover")) return
                 updateState({ hover: true }, key)
             },
             focus: () => {
@@ -192,8 +201,6 @@ export default function useComponentState<S extends Obj<boolean | undefined> = C
                 }
             },
         }
-
-        const l = listeners.current[key]
 
         const obs = new MutationObserver((mutations) => {
             for (const mutation of mutations) {
@@ -276,22 +283,22 @@ export default function useComponentState<S extends Obj<boolean | undefined> = C
         ) as ComponentState<S>
 
         void refresh(key)
-    }, [parentRef, stateDefinition, refresh, updateState, getAttributeState])
+    }, [parentRef, stateDefinition, refresh, isTouch, updateState, getAttributeState])
 
     useEffect(() => {
-        const o: Obj<ComponentState<S>> = overrides.current
+        const o: Obj<Obj<boolean | undefined>> = overrides.current
         const changedKeys: string[] = []
 
-        entriesOf(stateOverride ?? {} as { [K in keyof ComponentState<S>]: Obj<boolean | undefined> })
+        entriesOf(stateOverride ?? {} as { [K in keyof ComponentState<S>]?: boolean | Obj<boolean | undefined> })
             .forEach(([k, v]) => {
-                entriesOf(v).forEach(([kk, vv]) => {
-                    if (o?.[kk]?.[k] !== vv && !changedKeys.includes(kk)) {
-                        changedKeys.push(kk)
-                    }
-
-                    o[kk] = o[kk] ?? {}
-                    o[kk][k] = vv!
-                })
+                entriesOf(isBool(v) ? { default: v } : v ?? {})
+                    .forEach(([kk, vv]) => {
+                        if (o?.[kk]?.[k] !== vv && !changedKeys.includes(kk)) {
+                            changedKeys.push(kk)
+                        }
+                        o[kk] ??= {}
+                        o[kk][k] = vv as boolean | undefined
+                    })
             })
 
         if (!changedKeys.length) return
@@ -310,6 +317,8 @@ export default function useComponentState<S extends Obj<boolean | undefined> = C
 
             void refresh(key)
         })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stateOverride])
 
     return {

@@ -1,5 +1,7 @@
 {
     "include": [
+        "*",
+        ".*",
         "**/*",
         "**/.*/**/*"
     ],
@@ -10,8 +12,8 @@
     ],
     "compilerOptions": {
         "tsBuildInfoFile": "node_modules/.tmp/tsconfig.tsbuildinfo",
-        "baseUrl": ".",
         "useDefineForClassFields": true,
+        "baseUrl": ".",
         "target": "esnext",
         "lib": [
             "ES2024",
@@ -19,7 +21,8 @@
             "DOM.Iterable"
         ],
         "types": [
-            "vite/client"
+            "vite/client",
+            "./env.d.ts"
         ],
         "module": "ESNext",
         "jsx": "react-jsx",
