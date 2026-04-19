@@ -1,7 +1,7 @@
 import type { ProjectAnnotations, Renderer } from "storybook/internal/types"
 import { useEffect, useMemo } from "react"
 import type { ComponentState } from "@/hooks"
-import { TOOL_ID } from "@/const/state"
+import { STATE_TOOL_ID } from "@/const/state"
 import { toJson } from "@/util/parse"
 
 const preview: ProjectAnnotations<Renderer> = {
@@ -9,7 +9,7 @@ const preview: ProjectAnnotations<Renderer> = {
         (Story, { globals, canvasElement }) => {
             const canvas = canvasElement as ParentNode
 
-            const data = useMemo(() => globals[TOOL_ID] as ComponentState ?? {}, [globals])
+            const data = useMemo(() => globals[STATE_TOOL_ID] as ComponentState ?? {}, [globals])
 
             useEffect(() => {
                 canvas.querySelectorAll("[data-rms]").forEach((el) => {
@@ -21,7 +21,7 @@ const preview: ProjectAnnotations<Renderer> = {
         },
     ],
     initialGlobals: {
-        [TOOL_ID]: {},
+        [STATE_TOOL_ID]: {},
     },
 }
 

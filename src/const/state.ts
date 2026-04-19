@@ -1,23 +1,24 @@
 import type { ComponentState } from "@/types/com"
 
-export const ADDON_ID = "react-meta-state"
-export const TOOL_ID = `${ADDON_ID}/tool`
-export const PANEL_ID = `${ADDON_ID}/panel`
-export const TAB_ID = `${ADDON_ID}/tab`
+export const STATE_ADDON_ID = "react-meta-state-state"
+export const STATE_TOOL_ID = `${STATE_ADDON_ID}/tool`
+export const STATE_PANEL_ID = `${STATE_ADDON_ID}/panel`
+export const STATE_TAB_ID = `${STATE_ADDON_ID}/tab`
 
-export const EVENTS = {
-    RESULT: `${ADDON_ID}/result`,
-    REQUEST: `${ADDON_ID}/request`,
-}
+export const BREAKPOINT_ADDON_ID = "react-meta-state-breakpoints"
+export const BREAKPOINT_TOOL_ID = `${BREAKPOINT_ADDON_ID}/tool`
+export const BREAKPOINT_PANEL_ID = `${BREAKPOINT_ADDON_ID}/panel`
+export const BREAKPOINT_PARAM_ID = `${BREAKPOINT_ADDON_ID}/param`
+export const BREAKPOINT_ELEMENT_ID = `${BREAKPOINT_ADDON_ID}/element`
 
 export const DEFAULT_COMPONENT_STATE: ComponentState = {
     selected: false,
     hover: false,
+    active: false,
+    highlighted: false,
     focusWithin: false,
     focus: false,
     pressed: false,
-    active: false,
-    highlighted: false,
     disabled: false,
 }
 
