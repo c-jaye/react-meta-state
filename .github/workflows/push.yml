@@ -1,0 +1,45 @@
+on:
+  push:
+    branches:
+      - feat/**
+  pull_request:
+    branches:
+      - release/**
+      - dev
+      - main
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    environment: Production
+    env:
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      WEBFONTS_API_KEY: ${{ secrets.WEBFONTS_API_KEY }}
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: pnpm
+        uses: pnpm/action-setup@v6.0.2
+        with:
+          cache: true
+
+      - name: node
+        uses: actions/setup-node@v6.3.0
+        with:
+          node-version-file: package.json
+          check-latest: true
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: install
+        run: pnpm i
+
+      - name: test
+        run: pnpm run build
+
+      - name: publish
+        run: pnpm run publish:chromatic
