@@ -21,8 +21,8 @@
             "DOM.Iterable"
         ],
         "types": [
-            "./src/defs/env.d.ts",
-            "./src/defs/vite-env.d.ts"
+            "vite/client",
+            "./src/defs/env.d.ts"
         ],
         "module": "ESNext",
         "jsx": "react-jsx",

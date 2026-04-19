@@ -123,6 +123,9 @@ importers:
       verdaccio:
         specifier: ^6.5.0
         version: 6.5.2(typanion@3.14.0)
+      vite:
+        specifier: ^8.0.8
+        version: 8.0.8(@types/node@24.12.2)(esbuild@0.27.7)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)
       vite-tsconfig-paths:
         specifier: ^6.1.1
         version: 6.1.1(typescript@5.9.3)(vite@8.0.8(@types/node@24.12.2)(esbuild@0.27.7)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0))

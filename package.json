@@ -141,6 +141,7 @@
         "typescript-eslint": "^8.58.1",
         "unbuild": "^3.6.1",
         "verdaccio": "^6.5.0",
+        "vite": "^8.0.8",
         "vite-tsconfig-paths": "^6.1.1",
         "vitest": "^4.1.4"
     }
