@@ -1,19 +1,21 @@
 import type { DropdownListItemProps } from "./types"
+import type { JSONPrimitive } from "@/types/util"
 import classNames from "classnames"
 import useComponentState from "@/hooks/useComponentState"
 import { useEffect } from "react"
 
 import scss from "./dropdown-list-item.module.scss"
 
-export const DropdownListItem = ({
+export const DropdownListItem = <T extends JSONPrimitive = JSONPrimitive>({
     label,
-    value,
+    value = null,
     selected,
     onSelection,
+    onClick,
     stateProps,
     className,
     ...props
-}: DropdownListItemProps) => {
+}: DropdownListItemProps<T>) => {
     const { ref, updateState } = useComponentState(stateProps)
 
     useEffect(() => updateState({ selected }), [selected, updateState])
@@ -22,10 +24,10 @@ export const DropdownListItem = ({
         <div
             {...props}
             ref={ref}
-            className={classNames(scss.dropdownListItem, className)}
+            className={classNames("prose", scss.dropdownListItem, className)}
             onClick={(ev) => {
-                onSelection?.(value)
-                props.onClick?.(ev)
+                onSelection?.(value === null ? null : { label, value })
+                onClick?.(ev)
             }}
         >
             <span className={classNames(scss.text)}>

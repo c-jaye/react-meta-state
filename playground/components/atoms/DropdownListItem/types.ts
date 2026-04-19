@@ -1,9 +1,9 @@
+import type { JSONPrimitive, LabelValue } from "@/types/util"
 import type { BaseProps } from "@/types/com"
-import type { JSONPrimitive } from "@/types/util"
 
-export interface DropdownListItemProps<T extends JSONPrimitive = string> extends BaseProps<"div", never, {}> {
-    value: T
+export interface DropdownListItemProps<T extends JSONPrimitive = JSONPrimitive> extends BaseProps<"div", never, {}> {
+    value: T | null
     label: string
     selected?: boolean
-    onSelection?: (value: T) => void
+    onSelection?: (value: LabelValue<T> | null) => void
 }

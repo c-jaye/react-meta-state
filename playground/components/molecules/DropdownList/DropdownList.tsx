@@ -1,54 +1,88 @@
+import type { JSONPrimitive, LabelValue } from "@/types/util"
 import { useCallback, useEffect, useState } from "react"
 import type { DropdownListProps } from "./types"
 import classNames from "classnames"
+import { toJson } from "@/util/parse"
 import useComponentState from "@/hooks/useComponentState"
+import { useOptionSearch } from "@/hooks/useOptionsSearch"
 
 import DropdownListItem from "~/DropdownListItem"
 
 import scss from "./dropdown-list.module.scss"
 
-export const DropdownList = ({
+export const DropdownList = <T extends JSONPrimitive = JSONPrimitive>({
     items = [],
-    value,
+    value = null,
     onKeyDown,
     onSelection: _onSelection,
+    onSearch,
     stateProps,
     className,
     children,
     ...props
-}: DropdownListProps) => {
+}: DropdownListProps<T>) => {
     const { ref } = useComponentState(stateProps)
 
     const { ref: itemRef, refs: itemRefs } = useComponentState()
 
-    const [selectedValue, setSelectedValue] = useState<string | undefined>(value)
-    const [highlightedValue, setHighlightedValue] = useState<string | undefined>(value)
+    const [selectedValue, setSelectedValue] = useState<T | null>(value)
+    const [highlightedValue, setHighlightedValue] = useState<T | null>(value)
 
-    const onSelection = useCallback((value?: string) => {
-        setHighlightedValue(value)
-        setSelectedValue(value)
+    const onSelection = useCallback((value: LabelValue<T> | null) => {
+        setHighlightedValue(value?.value ?? null)
+        setSelectedValue(value?.value ?? null)
         _onSelection?.(value)
     }, [_onSelection])
 
+    const {
+        onSearchInput,
+    } = useOptionSearch({
+        items,
+        getTerms: item => item.label,
+        onMatch: (item) => {
+            setHighlightedValue(item.value)
+            itemRefs.current[toJson(item.value)]!.scrollIntoView({
+                inline: "center",
+                block: "center",
+                behavior: "smooth",
+            })
+        },
+        cooldown: 3000,
+        onSearch,
+    })
+
     const onKey = useCallback((ev: React.KeyboardEvent<HTMLDivElement>) => {
         if (["ArrowUp", "ArrowDown"].includes(ev.key)) {
-            const index = highlightedValue ? Math.max(items.findIndex(x => x.value === highlightedValue), 0) : 0
+            const index = highlightedValue
+                ? Math.max(items.findIndex(x => x.value === highlightedValue), 0)
+                : 0
             const offset = ev.key === "ArrowUp" ? -1 : 1
             const value = items[Math.min(Math.max(index + offset, 0), items.length - 1)].value
             setHighlightedValue(value)
-            itemRefs.current[value]!.scrollIntoView({ inline: "center", block: "center", behavior: "smooth" })
+            itemRefs.current[toJson(value)]!.scrollIntoView({
+                inline: "center",
+                block: "center",
+                behavior: "smooth",
+            })
             ev.preventDefault()
         }
-        if (["Enter", " "].includes(ev.key)) {
-            onSelection?.(highlightedValue)
+        if (ev.key === "Enter") {
+            onSelection?.(highlightedValue
+                ? {
+                    label: items.find(item => item.value === highlightedValue)?.label ?? "",
+                    value: highlightedValue,
+                }
+                : null)
             ev.preventDefault()
         }
+        onSearchInput(ev)
         onKeyDown?.(ev)
-    }, [highlightedValue, items, itemRefs, onSelection, onKeyDown])
+    }, [onSearchInput, onKeyDown, highlightedValue, items, itemRefs, onSelection])
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSelectedValue(value)
-        setHighlightedValue(value ?? "")
+        setHighlightedValue(value)
     }, [value])
 
     return (
@@ -63,14 +97,16 @@ export const DropdownList = ({
                 <DropdownListItem
                     {...props}
                     className={classNames(scss.dropdownListItem)}
-                    key={v}
+                    key={toJson(v)}
                     value={v}
                     selected={v === selectedValue}
-                    onSelection={onSelection}
+                    onSelection={v => onSelection(v)}
                     stateProps={{
-                        ref: el => itemRef(el, v),
+                        ...props.stateProps,
+                        ref: el => itemRef(el, toJson(v)),
                         stateOverride: {
-                            highlighted: { default: v === highlightedValue && v !== selectedValue },
+                            ...props.stateProps?.stateOverride,
+                            highlighted: v === highlightedValue && v !== selectedValue,
                         },
                     }}
                 />

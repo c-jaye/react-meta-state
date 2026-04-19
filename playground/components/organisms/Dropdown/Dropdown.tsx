@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import type { DropdownProps } from "./types"
+import type { JSONPrimitive } from "@/types/util"
 import classNames from "classnames"
 import useComponentState from "@/hooks/useComponentState"
 
@@ -7,13 +8,14 @@ import DropdownList from "~/DropdownList"
 
 import scss from "./dropdown.module.scss"
 
-export const Dropdown = ({
+export const Dropdown = <T extends JSONPrimitive = JSONPrimitive>({
     items = [],
-    value,
+    value = null,
+    onSelection,
     stateProps,
     className,
     ...props
-}: DropdownProps) => {
+}: DropdownProps<T>) => {
     const { ref, state, updateState } = useComponentState({
         ...stateProps,
         onStateChange: (s, k) => {
@@ -29,9 +31,15 @@ export const Dropdown = ({
         onStateChange: ({ disabled }) => updateState({ disabled }),
     })
 
-    const [selectedValue, setSelectedValue] = useState<string | undefined>(value)
+    const { ref: searchRef } = useComponentState()
 
-    useEffect(() => setSelectedValue(value), [value])
+    const [selectedValue, setSelectedValue] = useState<T | null>(value)
+    const [term, setTerm] = useState("")
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setSelectedValue(value ?? null)
+    }, [value])
 
     return (
         <div
@@ -39,22 +47,32 @@ export const Dropdown = ({
             ref={ref}
             className={classNames(scss.dropdown, className)}
         >
+            <div
+                ref={searchRef}
+                className={classNames("prose", scss.term)}
+            >
+                <span>{term}</span>
+            </div>
             <button
                 ref={buttonRef}
-                className={classNames(scss.button)}
-                tabIndex={state.default?.active ? -1 : 0}
-                onClick={() => updateState({ active: !state.default?.active })}
+                className={classNames("prose", scss.button)}
+                tabIndex={state.active ? -1 : 0}
+                onClick={() => updateState({ active: !state.active })}
             >
-                {items.find(item => item.value === selectedValue)?.label}
+                <span>
+                    {items.find(item => item.value === selectedValue)?.label}
+                </span>
             </button>
             <DropdownList
                 value={selectedValue}
                 items={items}
                 onSelection={(v) => {
-                    setSelectedValue(v)
+                    setSelectedValue(v?.value ?? null)
                     updateState({ active: false })
                     updateButtonState({ focus: true })
+                    onSelection?.(v)
                 }}
+                onSearch={x => setTerm(x)}
                 onKeyDown={(ev) => {
                     if (ev.key !== "Escape") return
                     updateState({ active: false })
@@ -63,9 +81,9 @@ export const Dropdown = ({
                 }}
                 stateProps={{
                     stateOverride: {
-                        active: { default: state.default?.active },
-                        focus: { default: state.default?.active },
-                        disabled: { default: state.default?.disabled },
+                        active: state.active,
+                        focus: state.active,
+                        disabled: state.disabled,
                     },
                 }}
             />

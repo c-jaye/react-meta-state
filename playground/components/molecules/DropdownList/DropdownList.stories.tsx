@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import DropdownList from "."
 
 const meta = {
-    title: "Test/DropdownList",
+    title: "Components/Molecules/DropdownList",
     component: DropdownList,
     args: {
         items: [
@@ -14,6 +14,7 @@ const meta = {
             { label: "Option 5", value: "5" },
         ],
         value: "2",
+        stateProps: { stateOverride: { active: true } },
     },
     render: args => (
         <div style={{ display: "grid", gap: "10px", overflow: "visible" }}>
@@ -27,4 +28,52 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {}
+export const Idle: Story = {}
+
+export const Selected: Story = {
+    args: {
+        stateProps: { stateOverride: { selected: true } },
+    },
+}
+
+export const Hover: Story = {
+    args: {
+        stateProps: { stateOverride: { hover: true } },
+    },
+}
+
+export const Active: Story = {
+    args: {
+        stateProps: { stateOverride: { active: true } },
+    },
+}
+
+export const Highlighted: Story = {
+    args: {
+        stateProps: { stateOverride: { highlighted: true } },
+    },
+}
+
+export const FocusWithin: Story = {
+    args: {
+        stateProps: { stateOverride: { focusWithin: true } },
+    },
+}
+
+export const Focus: Story = {
+    args: {
+        stateProps: { stateOverride: { focus: true } },
+    },
+}
+
+export const Pressed: Story = {
+    args: {
+        stateProps: { stateOverride: { pressed: true } },
+    },
+}
+
+export const Disabled: Story = {
+    args: {
+        stateProps: { stateOverride: { disabled: true } },
+    },
+}
