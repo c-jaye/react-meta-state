@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - feat/**
+      - release/**
   pull_request:
     branches:
       - release/**
