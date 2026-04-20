@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.chromatic.com/config-file.schema.json",
   "onlyChanged": true,
-  "projectId": "69e4198092cb9d9b98493ad4",
+  "projectId": "69e56f4eee3aa67d5c391302",
   "zip": true,
   "buildScriptName": "build:storybook",
   "junitReport": true
