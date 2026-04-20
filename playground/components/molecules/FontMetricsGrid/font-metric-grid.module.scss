@@ -19,7 +19,7 @@ $lineHeight: calc(#{$calc_fontSize} + #{$calc_additionalLineHeight});
 }
 
 .text {
-    color: token("bg-disabled");
+    color: token("fg-hover");
 }
 
 .lines {
