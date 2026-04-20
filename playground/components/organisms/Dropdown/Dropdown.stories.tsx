@@ -32,8 +32,7 @@ const meta: Meta<typeof Dropdown> = {
             }}
             >
                 <Dropdown {...args} />
-                <Dropdown {...args} />
-                <Dropdown {...args} />
+                <Dropdown {...args} data-theme="light" />
             </div>
         )
     },
