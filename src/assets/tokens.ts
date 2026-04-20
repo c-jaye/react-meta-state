@@ -41,13 +41,13 @@ export const aspects = {
 
 export const themes = {
     light: {
-        "bg-idle": "#ccc",
-        "bg-selected": "#aaa",
-        "bg-pressed": "#888",
-        "bg-highlighted": "#666",
-        "bg-disabled": "#333",
+        "bg-idle": "#ddd",
+        "bg-selected": "#bbb",
+        "bg-pressed": "#aaa",
+        "bg-highlighted": "#888",
+        "bg-disabled": "#666",
         "shadow-active": "#000",
-        "fg-idle": "#555",
+        "fg-idle": "#444",
         "fg-hover": "#000",
         "fg-inverse": "#ccc",
         "border-focus-within": "#0a0",
