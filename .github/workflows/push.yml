@@ -1,7 +1,6 @@
 on:
   pull_request:
     branches:
-      - feat/**
       - release/**
       - dev
       - main
@@ -39,5 +38,8 @@ jobs:
       - name: test
         run: pnpm run build
 
-      - name: publish
-        run: pnpm run publish:chromatic
+      - name: chromatic
+        uses: chromaui/action@latest
+        with:
+          onlyChanged: true
+          exitZeroOnChanges: true
