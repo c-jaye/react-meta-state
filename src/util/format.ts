@@ -5,3 +5,7 @@ export function splitWords(text: string) {
 export function titleCase(text: string) {
     return splitWords(text).map(t => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase()).join(" ")
 }
+
+export function kebabCase(text: string) {
+    return splitWords(text).map(t => t.toLowerCase()).join("-")
+}
