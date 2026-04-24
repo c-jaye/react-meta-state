@@ -15,6 +15,10 @@ jobs:
       NPM_KEY: ${{ secrets.NPM_KEY }}
     steps:
 
+      - name: bump
+        run: |
+          sed -i -E 's/"version": *"[^"]*"/"version": "'"${GITHUB_REF_NAME#v}"'"/' package.json
+
       - name: checkout
         uses: actions/checkout@v4
         with:
@@ -48,5 +52,5 @@ jobs:
       - name: publish-init
         run: echo //registry.npmjs.org/:_authToken=${{ secrets.NPM_KEY }}\n >> ./.npmrc && cat ./.npmrc
 
-      # - name: publish
-      #   run: pnpm run publish:npm
+      - name: publish
+        run: pnpm run publish:npm
