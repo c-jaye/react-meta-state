@@ -1,0 +1,12 @@
+@use "tokens/tokens" as *;
+
+@forward "../../../src/assets/scss/abstracts/aspect" with (
+    $const-aspects: $const-aspects
+);
+@forward "../../../src/assets/scss/abstracts/pointer";
+@forward "../../../src/assets/scss/abstracts/state";
+@forward "../../../src/assets/scss/abstracts/theme";
+@forward "../../../src/assets/scss/abstracts/type";
+
+@forward "tokens/tokens";
+@forward "styles/styles";
