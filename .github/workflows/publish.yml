@@ -40,13 +40,13 @@ jobs:
         run: pnpm run test
 
       - name: verdaccio-init
-        run: echo //localhost:30333/:_authToken=${{ secrets.VERDACCIO_KEY }}\n >> ./.npmrc && echo ./.npmrc
+        run: echo //localhost:30333/:_authToken=${{ secrets.VERDACCIO_KEY }}\n >> ./.npmrc && cat ./.npmrc
 
       - name: verdaccio
         run: pnpm run dev:verdaccio & sleep 3 && pnpm run publish:verdaccio
 
       - name: publish-init
-        run: echo //registry.npmjs.org/:_authToken=${{ secrets.NPM_KEY }}\n >> ./.npmrc && echo ./.npmrc
+        run: echo //registry.npmjs.org/:_authToken=${{ secrets.NPM_KEY }}\n >> ./.npmrc && cat ./.npmrc
 
       # - name: publish
       #   run: pnpm run publish:npm
