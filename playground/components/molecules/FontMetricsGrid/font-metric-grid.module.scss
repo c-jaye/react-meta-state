@@ -1,4 +1,4 @@
-@use "../../../../src/assets/scss/main" as *;
+@use "../../../assets/scss/main" as *;
 
 $paddingTop: var(--top, #{$calc_lineOffsetTop});
 $paddingBottom: var(--bottom, #{$calc_lineOffsetBottom});

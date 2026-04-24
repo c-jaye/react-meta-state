@@ -1,19 +1,21 @@
-import { buildTokens, loadTokens } from "../../bin/generate"
-import type { ViteDevServer } from "vite"
+/* eslint-disable import-x/no-nodejs-modules */
+
+import type { InlineConfig } from "vite"
 import { defineMain } from "@storybook/react-vite/node"
 import dotenv from "dotenv"
 import { mergeConfig } from "vite"
-import tsconfigPaths from "vite-tsconfig-paths"
+import { resolve } from "path"
+import tokenGenerator from "../../src/plugins/tokenGenerator"
 
 const config = defineMain({
     stories: [
         "../**/*.stories.@(ts|tsx)",
     ],
     addons: [
-        "@chromatic-com/storybook",
         "@storybook/addon-vitest",
         "@storybook/addon-designs",
         "@storybook/addon-a11y",
+        "@chromatic-com/storybook",
         import.meta.resolve("./localPreset.ts"),
     ],
     framework: {
@@ -33,27 +35,23 @@ const config = defineMain({
     viteFinal: (config) => {
         dotenv.config()
         return mergeConfig(config, {
+            resolve: {
+                tsconfigPaths: true,
+            },
             plugins: [
-                {
-                    configureServer(server: ViteDevServer) {
-                        const targetFile = "/src/assets/tokens.ts"
-
-                        server.watcher.on("change", (file) => {
-                            if (!file.endsWith(targetFile)) return
-                            void loadTokens().then(buildTokens)
-                        })
-                    },
-                },
-                tsconfigPaths(),
+                tokenGenerator(
+                    resolve(import.meta.dirname, "../assets/scss.ts"),
+                    resolve(import.meta.dirname, "../assets/scss/tokens"),
+                ),
             ],
             optimizeDeps: {
-                exclude: ["ast-types"],
-                include: ["react", "react-dom", "classnames", "opentype.js"],
+                exclude: ["ast-types", "opentype.js"],
+                include: ["react", "react-dom", "classnames"],
             },
             define: {
                 "process.env": process.env,
             },
-        })
+        } satisfies InlineConfig)
     },
 })
 

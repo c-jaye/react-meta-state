@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
-import FontMetricGrid from "~/FontMetricsGrid"
 import type { FontMetricsProps } from "./types"
 import { LOREM_IPSUM } from "@/const/strings"
 import classNames from "classnames"
-import { useWebFonts } from "@/hooks/useWebFonts"
+import { useWebFonts } from "~/hooks/useWebFonts"
 
-import Dropdown from "~/Dropdown"
+import Dropdown from "~/components/Dropdown"
+import FontMetricGrid from "~/components/FontMetricsGrid"
 
 import scss from "./font-metrics.module.scss"
 

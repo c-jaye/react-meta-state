@@ -1,12 +1,11 @@
-import type { JSONPrimitive, LabelValue } from "@/types/util"
+import type { JSONPrimitive, LabelValue } from "@/types"
 import { useCallback, useEffect, useState } from "react"
+import { useComponentState, useOptionsSearch } from "@/hooks"
 import type { DropdownListProps } from "./types"
 import classNames from "classnames"
-import { toJson } from "@/util/parse"
-import useComponentState from "@/hooks/useComponentState"
-import { useOptionSearch } from "@/hooks/useOptionsSearch"
+import { toJson } from "@/util"
 
-import DropdownListItem from "~/DropdownListItem"
+import DropdownListItem from "~/components/DropdownListItem"
 
 import scss from "./dropdown-list.module.scss"
 
@@ -22,7 +21,6 @@ export const DropdownList = <T extends JSONPrimitive = JSONPrimitive>({
     ...props
 }: DropdownListProps<T>) => {
     const { ref } = useComponentState(stateProps)
-
     const { ref: itemRef, refs: itemRefs } = useComponentState()
 
     const [selectedValue, setSelectedValue] = useState<T | null>(value)
@@ -36,7 +34,7 @@ export const DropdownList = <T extends JSONPrimitive = JSONPrimitive>({
 
     const {
         onSearchInput,
-    } = useOptionSearch({
+    } = useOptionsSearch({
         items,
         getTerms: item => item.label,
         onMatch: (item) => {

@@ -6,7 +6,7 @@ import type { KeyOf } from "@/types/util"
 import { deepMerge } from "@/util/merge"
 import { keysOf } from "@/util/helpers"
 import { titleCase } from "@/util/convert"
-import { unit } from "@/assets/tokens"
+import { unit } from "~/assets/scss"
 
 export function generateStateStory<T extends BaseProps>(
     meta: Meta<T>,

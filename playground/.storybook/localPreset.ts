@@ -1,18 +1,19 @@
-// eslint-disable-next-line import-x/no-nodejs-modules
-import { fileURLToPath } from "node:url"
+/* eslint-disable import-x/no-nodejs-modules */
+
+import { resolve } from "path"
 
 export function previewAnnotations(entry = []) {
     return [
         ...entry,
-        fileURLToPath(import.meta.resolve("../../dist/addons/state/preview.mjs")),
-        fileURLToPath(import.meta.resolve("../../dist/addons/breakpoints/preview.mjs")),
+        resolve(import.meta.dirname, "../../dist/addons/state/preview.mjs"),
+        resolve(import.meta.dirname, "../../dist/addons/breakpoints/preview.mjs"),
     ]
 }
 
 export function managerEntries(entry = []) {
     return [
         ...entry,
-        fileURLToPath(import.meta.resolve("../../dist/addons/state/manager.mjs")),
-        fileURLToPath(import.meta.resolve("../../dist/addons/breakpoints/manager.mjs")),
+        resolve(import.meta.dirname, "../../dist/addons/state/manager.mjs"),
+        resolve(import.meta.dirname, "../../dist/addons/breakpoints/manager.mjs"),
     ]
 }
