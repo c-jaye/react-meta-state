@@ -28,11 +28,11 @@
         "build": "pnpm run test && pnpm run build:bundle",
         "build:storybook": "storybook build -c ./playground/.storybook",
         "build:bundle": "unbuild",
-        "dev": "pnpm run build:bundle && concurrently \"pnpm run dev:storybook\" \"pnpm run dev:verdaccio\"",
+        "dev": "pnpm run build:bundle && pnpm run dev:storybook",
         "dev:storybook": "storybook dev -p 6006 -c ./playground/.storybook",
         "dev:verdaccio": "verdaccio --listen 30333",
         "prepublishOnly": "del-cli --force \"**/dist\" && pnpm run build",
-        "publish:verdaccio": "verdaccio/init || true && verdaccio/login && pnpm publish --access public --tag latest --no-git-checks --registry http://localhost:30333",
+        "publish:verdaccio": "verdaccio/init || true && verdaccio/login && pnpm run dev:verdaccio & sleep 3 && pnpm publish --access public --tag latest --no-git-checks --registry http://localhost:30333",
         "publish:chromatic": "pnpx chromatic@latest",
         "publish:npm": "pnpm publish --access public --tag latest --no-git-checks --registry registry.npmjs.org"
     },
