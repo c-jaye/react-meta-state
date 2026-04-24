@@ -16,7 +16,9 @@ const config = defineMain({
         "@storybook/addon-designs",
         "@storybook/addon-a11y",
         "@chromatic-com/storybook",
-        import.meta.resolve("./localPreset.ts"),
+        process.env.STORYBOOK
+            ? ""
+            : import.meta.resolve("./localPreset.ts"),
     ],
     framework: {
         name: "@storybook/react-vite",
@@ -45,7 +47,7 @@ const config = defineMain({
                 ),
             ],
             optimizeDeps: {
-                exclude: ["ast-types", "opentype.js"],
+                exclude: ["ast-types", "opentype.js", "fs", "fs/promises"],
                 include: ["react", "react-dom", "classnames"],
             },
             define: {
