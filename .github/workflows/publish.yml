@@ -15,10 +15,6 @@ jobs:
       NPM_KEY: ${{ secrets.NPM_KEY }}
     steps:
 
-      - name: bump
-        run: |
-          sed -i -E 's/"version": *"[^"]*"/"version": "'"${GITHUB_REF_NAME#v}"'"/' package.json
-
       - name: checkout
         uses: actions/checkout@v4
         with:
@@ -39,6 +35,10 @@ jobs:
 
       - name: install
         run: pnpm i
+
+      - name: bump
+        run: |
+          sed -i -E 's/"version": *"[^"]*"/"version": "'"${GITHUB_REF_NAME#v}"'"/' package.json
 
       - name: test
         run: pnpm run test
