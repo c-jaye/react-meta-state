@@ -1,5 +1,5 @@
 import type { FontFaceConfig, FontMetricsConfig, FontTypeConfig } from "@/types/components"
-import type { BaseProps } from "@/types/com"
+import type { BaseProps } from "@/types"
 
 export interface FontMetricsProps extends
     BaseProps<"div", never, {}>,

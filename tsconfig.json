@@ -41,10 +41,13 @@
         "noFallthroughCasesInSwitch": true,
         "noUncheckedSideEffectImports": true,
         "paths": {
-            "~/*": [
+            "~/components/*": [
                 "playground/components/atoms/*",
                 "playground/components/molecules/*",
                 "playground/components/organisms/*"
+            ],
+            "~/*": [
+                "playground/*"
             ],
             "@/*": [
                 "src/*"

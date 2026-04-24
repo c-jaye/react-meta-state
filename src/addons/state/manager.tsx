@@ -3,7 +3,7 @@ import { addons, types } from "storybook/manager-api"
 import { StateTool } from "./components/StateTool"
 import { renderLabel } from "./manager-helpers"
 
-addons.register(STATE_ADDON_ID, (api) => {
+export default addons.register(STATE_ADDON_ID, (api) => {
     addons.add(STATE_TOOL_ID, {
         type: types.TOOL,
         title: "React Meta State",

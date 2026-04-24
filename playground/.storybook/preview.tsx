@@ -1,8 +1,8 @@
 import type { Preview } from "@storybook/react-vite"
 import { StrictMode } from "react"
-import tokens from "@/assets/tokens"
+import { themes } from "~/assets/scss"
 
-import "@/assets/scss/global.scss"
+import "~/assets/scss/global.scss"
 
 const preview: Preview = {
     parameters: {
@@ -10,11 +10,11 @@ const preview: Preview = {
             options: {
                 light: {
                     name: "Light",
-                    value: tokens.themes.data.light["bg-idle"],
+                    value: themes.light.bgIdle,
                 },
                 dark: {
                     name: "Dark",
-                    value: tokens.themes.data.dark["bg-idle"],
+                    value: themes.dark.bgIdle,
                 },
             },
         },
