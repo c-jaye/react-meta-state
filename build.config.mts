@@ -1,15 +1,19 @@
 /* eslint-disable import-x/no-nodejs-modules */
-import { URL, fileURLToPath } from "node:url"
-import { copyFile, mkdir, rm } from "node:fs/promises"
+
+import { copyFile, mkdir, rm } from "fs/promises"
 import { defineBuildConfig } from "unbuild"
 import { exec } from "child_process"
 import { glob } from "tinyglobby"
+import { resolve } from "path"
 
 export default defineBuildConfig([{
     failOnWarn: false,
     hooks: {
         async "build:done"() {
-            const unnecessaryFiles = await glob("dist/**/*.d.(c)?ts")
+            const unnecessaryFiles = [
+                ...await glob("dist/**/*.d.(c)?ts"),
+                ...await glob("dist/types/**/*.*js"),
+            ]
             for (const file of unnecessaryFiles) {
                 await rm(file)
             }
@@ -28,35 +32,47 @@ export default defineBuildConfig([{
         },
     },
     alias: {
-        "@": fileURLToPath(new URL("./src", import.meta.url)),
+        "@": resolve(import.meta.dirname, "./src"),
     },
     entries: [{
-        input: "src/hooks/index.ts",
-        name: "index",
-        declaration: true,
-    }, {
-        input: "src/tools/BreakpointTool/index.ts",
+        input: "src/addons/breakpoints/index.ts",
         name: "addons/breakpoints/index",
         declaration: true,
     }, {
-        input: "src/tools/BreakpointTool/preview.tsx",
+        input: "src/addons/breakpoints/preview.tsx",
         name: "addons/breakpoints/preview",
         declaration: true,
     }, {
-        input: "src/tools/BreakpointTool/manager.tsx",
+        input: "src/addons/breakpoints/manager.tsx",
         name: "addons/breakpoints/manager",
         declaration: true,
     }, {
-        input: "src/tools/StateTool/index.ts",
+        input: "src/addons/state/index.ts",
         name: "addons/state/index",
         declaration: true,
     }, {
-        input: "src/tools/StateTool/preview.tsx",
+        input: "src/addons/state/preview.tsx",
         name: "addons/state/preview",
         declaration: true,
     }, {
-        input: "src/tools/StateTool/manager.tsx",
+        input: "src/addons/state/manager.tsx",
         name: "addons/state/manager",
+        declaration: true,
+    }, {
+        input: "src/hooks/index.ts",
+        name: "hooks/index",
+        declaration: true,
+    }, {
+        input: "src/plugins/index.ts",
+        name: "plugins/index",
+        declaration: true,
+    }, {
+        input: "src/types/index.ts",
+        name: "types/index",
+        declaration: true,
+    }, {
+        input: "src/util/index.ts",
+        name: "util/index",
         declaration: true,
     }],
     outDir: "dist",
@@ -65,6 +81,12 @@ export default defineBuildConfig([{
         "react",
         "react-dom",
         "@storybook/icons",
+        "opentype.js",
+        "sass",
+        "stylus",
+        "terser",
+        "less",
+        "vite",
     ],
     rollup: {
         esbuild: {

@@ -1,4 +1,7 @@
-@use "../main" as *;
+@use "sass:map";
+
+@use "../vars/vars" as *;
+$const-themes: () !default;
 
 @mixin buildThemes {
     @each $_themeName, $_theme in $const-themes {

@@ -1,8 +1,8 @@
 import type { Meta } from "@storybook/react-vite"
-import { generateStateStory } from "playground/util/storyTools"
+import { generateStateStory } from "~/util/storyTools"
+import { unit } from "~/assets/scss"
 
 import TestCard from "."
-import { unit } from "@/assets/tokens"
 
 const meta: Meta<typeof TestCard> = {
     title: "Components/Molecules/TestCard",

@@ -1,4 +1,4 @@
-import type { BaseProps } from "@/types/com"
+import type { BaseProps } from "@/types"
 
 export interface TestLayoutProps extends BaseProps<"div", never, {}> {
     unitNarrow?: string

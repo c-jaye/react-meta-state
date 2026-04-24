@@ -1,10 +1,11 @@
 @use "sass:map";
 
-@use "../tokens/tokens" as *;
+@use "../vars/vars" as *;
+$const-aspects: () !default;
 
 $v-aspectUnit: var(--aspect-unit, 1lvh);
 
-@mixin forAspect($_aspect: $const-aspects) {
+@mixin forAspect($_aspect) {
 	@media (min-aspect-ratio: #{map.get(map.get($const-aspects, $_aspect), "ratio")}) {
 		@content;
 	}

@@ -1,4 +1,4 @@
-@use "../abstracts/abstracts" as *;
+@use "../../../../src/assets/scss/abstracts/abstracts" as *;
 
 @mixin styleH1 {
   @include useFontFace("OpenSansBold");

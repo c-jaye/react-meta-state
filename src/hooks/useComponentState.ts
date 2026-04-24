@@ -1,11 +1,7 @@
-import type { ComponentState, ComponentStateProps } from "@/types/com"
-import type { Mutable, Obj } from "@/types/util"
-import { deepMerge, deepMergeAll } from "@/util/merge"
-import { entriesOf, isBool, isFunc, isIn, keysOf } from "@/util/helpers"
+import type { ComponentState, ComponentStateProps, Mutable, Obj } from "@/types"
+import { deepMerge, deepMergeAll, entriesOf, fromJson, isBool, isFunc, isIn, keysOf, wait } from "@/util"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { DEFAULT_COMPONENT_STATE } from "@/const/state"
-import { fromJson } from "@/util/parse"
-import { wait } from "@/util/async"
 
 export default function useComponentState<S extends Obj<boolean | undefined> = ComponentState>(
     options?: ComponentStateProps<S>,
@@ -123,7 +119,7 @@ export default function useComponentState<S extends Obj<boolean | undefined> = C
         patch: Partial<ComponentState<S>>,
         key = "default",
     ) => {
-        queuedState.current[key] = deepMerge(queuedState.current[key] ?? {}, patch) as Partial<ComponentState<S>>
+        queuedState.current[key] = deepMerge(queuedState.current[key] ?? {}, patch)
 
         void refresh(key)
     }, [refresh])
@@ -280,7 +276,7 @@ export default function useComponentState<S extends Obj<boolean | undefined> = C
             stateDefinition ?? {},
             queuedState.current[key] ?? {},
             s ?? {},
-        ) as ComponentState<S>
+        )
 
         void refresh(key)
     }, [parentRef, stateDefinition, refresh, isTouch, updateState, getAttributeState])
@@ -289,7 +285,7 @@ export default function useComponentState<S extends Obj<boolean | undefined> = C
         const o: Obj<Obj<boolean | undefined>> = overrides.current
         const changedKeys: string[] = []
 
-        entriesOf(stateOverride ?? {} as { [K in keyof ComponentState<S>]?: boolean | Obj<boolean | undefined> })
+        entriesOf(stateOverride ?? {})
             .forEach(([k, v]) => {
                 entriesOf(isBool(v) ? { default: v } : v ?? {})
                     .forEach(([kk, vv]) => {
@@ -297,7 +293,7 @@ export default function useComponentState<S extends Obj<boolean | undefined> = C
                             changedKeys.push(kk)
                         }
                         o[kk] ??= {}
-                        o[kk][k] = vv as boolean | undefined
+                        o[kk][k] = vv
                     })
             })
 

@@ -1,4 +1,4 @@
-import type { Obj } from "@/types/util"
+import type { Obj } from "@/types"
 
 export interface ViewportTypes {
     globals: ViewportState
