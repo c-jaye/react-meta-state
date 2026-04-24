@@ -1,4 +1,4 @@
-import type { Arr, Obj } from "@/types/util"
+import type { Arr, Obj } from "@/types"
 import { isArr, isObj } from "./helpers"
 
 export type MergeArr<T extends Arr, U extends Arr> = [...T, ...U]

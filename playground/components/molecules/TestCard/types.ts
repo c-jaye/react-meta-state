@@ -1,4 +1,4 @@
-import type { BaseProps } from "@/types/com"
+import type { BaseProps } from "@/types"
 
 export interface TestCardProps extends BaseProps<"div", never, {}> {
     title: string

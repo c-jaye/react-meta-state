@@ -1,6 +1,6 @@
 import type { ChangeEvent, FC, ReactNode } from "react"
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
-import type { BaseProps } from "@/hooks"
+import type { BaseProps } from "@/types"
 import { Form } from "storybook/internal/components"
 import { Wrapper } from "./atoms"
 import { useTheme } from "storybook/theming"

@@ -1,0 +1,19 @@
+@use "tokens/tokens" as *;
+
+@use "../../../src/assets/scss/global/reset";
+@use "../../../src/assets/scss/global/type" with (
+    $const-fonts: $const-fonts
+);
+@use "../../../src/assets/scss/global/aspect" with (
+    $const-aspects: $const-aspects
+);
+@use "../../../src/assets/scss/global/theme" with (
+    $const-themes: $const-themes
+);
+
+:root {
+    @include reset.includeReset;
+    @include type.includeType;
+    @include aspect.includeAspects;
+    @include theme.includeThemes;
+}

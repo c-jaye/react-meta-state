@@ -1,4 +1,4 @@
-@use "../../../../src/assets/scss/main" as *;
+@use "../../../assets/scss/main" as *;
 
 $paddingTop: var(--top, #{$calc_lineOffsetTop});
 $paddingBottom: var(--bottom, #{$calc_lineOffsetBottom});
@@ -19,7 +19,7 @@ $lineHeight: calc(#{$calc_fontSize} + #{$calc_additionalLineHeight});
 }
 
 .text {
-    color: token("bg-disabled");
+    color: token("fg-hover");
 }
 
 .lines {

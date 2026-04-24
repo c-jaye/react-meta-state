@@ -1,5 +1,7 @@
-@use "../tokens/tokens" as *;
+@use "sass:map";
 
-@function token($_var: $const-themes) {
+@use "../vars/vars" as *;
+
+@function token($_var) {
     @return var(--#{$_var});
 }

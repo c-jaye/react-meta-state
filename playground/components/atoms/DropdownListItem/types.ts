@@ -1,5 +1,4 @@
-import type { JSONPrimitive, LabelValue } from "@/types/util"
-import type { BaseProps } from "@/types/com"
+import type { BaseProps, JSONPrimitive, LabelValue } from "@/types"
 
 export interface DropdownListItemProps<T extends JSONPrimitive = JSONPrimitive> extends BaseProps<"div", never, {}> {
     value: T | null

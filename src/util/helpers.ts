@@ -1,4 +1,4 @@
-import type { Arr, Falsey, Func, KeyOf, Obj, Primitive } from "@/types/util"
+import type { Arr, Falsey, Func, KeyOf, Obj, Primitive } from "@/types"
 
 export function randomFrom<T>(arr: T[]): T {
     return arr[Math.floor(Math.random() * arr.length)]

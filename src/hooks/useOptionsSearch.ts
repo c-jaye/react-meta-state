@@ -8,13 +8,13 @@ export interface UseOptionSearchOptions<T> {
     cooldown?: number
 }
 
-export const useOptionSearch = <T>({
+export default function useOptionsSearch<T>({
     items,
     getTerms,
     onMatch,
     onSearch,
     cooldown = 1000,
-}: UseOptionSearchOptions<T>) => {
+}: UseOptionSearchOptions<T>) {
     const searchTerm = useRef("")
     const searchTime = useRef(0)
 

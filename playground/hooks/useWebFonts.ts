@@ -1,10 +1,8 @@
-import type { LabelValue, Obj } from "@/types/util"
-import { calculateMetrics, installFontFace, measureText, opentypeMetrics } from "@/util/type"
-import { fetchAny, fetchJson } from "@/util/fetch"
+import type { LabelValue, Obj } from "@/types"
+import { calculateMetrics, fetchAny, fetchJson, installFontFace, measureText, opentypeMetrics, toUrlParams } from "@/util"
 import { useCallback, useRef, useState } from "react"
 import { FONT_TEST_CHARACTERS } from "@/const/strings"
 import type { FullMetrics } from "@/types/type"
-import { toUrlParams } from "@/util/parse"
 
 export interface UseWebFontsOptions {
     onLoadOptions?: (options: {
@@ -14,7 +12,7 @@ export interface UseWebFontsOptions {
     onLoadMetrics?: (metrics: FullMetrics) => void
 }
 
-export const useWebFonts = (options?: UseWebFontsOptions) => {
+export function useWebFonts(options?: UseWebFontsOptions) {
     const {
         onLoadOptions,
         onLoadMetrics,

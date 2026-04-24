@@ -1,4 +1,4 @@
-@use "../tokens/tokens" as *;
+@use "sass:map";
 
 @mixin canHover {
   @media (hover: hover) and (pointer: fine) and (update: fast) {

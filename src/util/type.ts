@@ -5,14 +5,14 @@ import type { Metrics } from "@/types/type"
 import opentype from "opentype.js"
 import { round } from "./math"
 
-export const measureText = (text: string, options: {
+export function measureText(text: string, options: {
     fontFamily: string
     fontWeight: string
     fontStyle: string
 
     fontSize: number
     letterSpacing?: number
-}) => {
+}) {
     const canvas = document.createElement("canvas")
     const ctx = canvas.getContext("2d")!
 
@@ -45,22 +45,22 @@ export const measureText = (text: string, options: {
     }
 }
 
-export const installFontFace = async (
+export async function installFontFace(
     buffer: ArrayBuffer,
     family: string,
     weight: string,
-) => {
+) {
     const fontFace = new FontFace(family, buffer, { weight })
     await fontFace.load()
     document.fonts.add(fontFace)
     return fontFace
 }
 
-export const opentypeMetrics = (buffer: ArrayBuffer) => {
+export function opentypeMetrics(buffer: ArrayBuffer) {
     return opentype.parse(buffer)
 }
 
-export const calculateMetrics = (opentype: Font, fontSize: number): Metrics => {
+export function calculateMetrics(opentype: Font, fontSize: number): Metrics {
     const {
         tables: { hhea, os2 },
         unitsPerEm,
@@ -78,24 +78,30 @@ export const calculateMetrics = (opentype: Font, fontSize: number): Metrics => {
     return metrics
 }
 
-export const fontFaceStyles = (data?: Partial<FontFaceConfig>) => ({
-    "--font-family": data?.fontFamily ?? "\"Open Sans\", sans-serif",
-    "--font-weight": data?.fontWeight ?? 600,
-    "--font-style": data?.fontStyle ?? "normal",
-}) as CSSProperties
+export function fontFaceStyles(data?: Partial<FontFaceConfig>) {
+    return {
+        "--font-family": data?.fontFamily ?? "\"Open Sans\", sans-serif",
+        "--font-weight": data?.fontWeight ?? 600,
+        "--font-style": data?.fontStyle ?? "normal",
+    } as CSSProperties
+}
 
-export const fontMetricsStyles = (data?: Partial<FontMetricsConfig>) => ({
-    "--fm-ascent": round(data?.ascent ?? 106.884766, 6),
-    "--fm-cap-height": round(data?.capHeight ?? 71.386719, 6),
-    "--fm-ex-height": round(data?.exHeight ?? 53.515625, 6),
-    "--fm-descent": round(data?.descent ?? 29.296875, 6),
-    "--fm-line-gap": round(data?.lineGap ?? 0, 6),
-    "--fm-size": round(data?.size ?? 100, 6),
-}) as CSSProperties
+export function fontMetricsStyles(data?: Partial<FontMetricsConfig>) {
+    return {
+        "--fm-ascent": round(data?.ascent ?? 106.884766, 6),
+        "--fm-cap-height": round(data?.capHeight ?? 71.386719, 6),
+        "--fm-ex-height": round(data?.exHeight ?? 53.515625, 6),
+        "--fm-descent": round(data?.descent ?? 29.296875, 6),
+        "--fm-line-gap": round(data?.lineGap ?? 0, 6),
+        "--fm-size": round(data?.size ?? 100, 6),
+    } as CSSProperties
+}
 
-export const fontTypeStyles = (data?: Partial<FontTypeConfig>) => ({
-    "--font-size": round(data?.fontSize ?? 4, 6),
-    "--font-spacing": round(data?.letterSpacing ?? 0, 6),
-    "--font-line-height": round(data?.lineHeight ?? 1, 6),
-    "--font-unit": data?.fontUnit ?? "var(--font-unit, var(--aspect-unit, 2lvh))",
-}) as CSSProperties
+export function fontTypeStyles(data?: Partial<FontTypeConfig>) {
+    return {
+        "--font-size": round(data?.fontSize ?? 4, 6),
+        "--font-spacing": round(data?.letterSpacing ?? 0, 6),
+        "--font-line-height": round(data?.lineHeight ?? 1, 6),
+        "--font-unit": data?.fontUnit ?? "var(--font-unit, var(--aspect-unit, 2lvh))",
+    } as CSSProperties
+}

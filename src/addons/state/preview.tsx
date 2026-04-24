@@ -1,8 +1,8 @@
 import type { ProjectAnnotations, Renderer } from "storybook/internal/types"
 import { useEffect, useMemo } from "react"
-import type { ComponentState } from "@/hooks"
+import type { ComponentState } from "@/types"
 import { STATE_TOOL_ID } from "@/const/state"
-import { toJson } from "@/util/parse"
+import { toJson } from "@/util"
 
 const preview: ProjectAnnotations<Renderer> = {
     decorators: [

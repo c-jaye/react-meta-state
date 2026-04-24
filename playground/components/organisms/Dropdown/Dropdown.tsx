@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import type { DropdownProps } from "./types"
-import type { JSONPrimitive } from "@/types/util"
+import type { JSONPrimitive } from "@/types"
 import classNames from "classnames"
 import useComponentState from "@/hooks/useComponentState"
 
-import DropdownList from "~/DropdownList"
+import DropdownList from "~/components/DropdownList"
 
 import scss from "./dropdown.module.scss"
 
