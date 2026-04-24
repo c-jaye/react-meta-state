@@ -1,4 +1,4 @@
-import type { ViewportMap, ViewportState } from "./types.ts"
+import type { ViewportMap, ViewportState } from "./types"
 
 export const VIEWPORT_MIN_WIDTH = 40
 export const VIEWPORT_MIN_HEIGHT = 40

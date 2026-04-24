@@ -1,7 +1,7 @@
 import { type API, useGlobals, useParameter } from "storybook/manager-api"
 import { DEFAULT_METRICS, DEFAULT_VIEWPORT, VIEWPORTS, VIEWPORT_MAX_HEIGHT, VIEWPORT_MAX_WIDTH, VIEWPORT_MIN_HEIGHT, VIEWPORT_MIN_WIDTH } from "./defaults"
 import type { ViewportMap, ViewportParameters, ViewportState, ViewportStyles, ViewportType } from "./types"
-import { isString, valuesOf } from "@/util/helpers"
+import { isString, valuesOf } from "@/util"
 import { useCallback, useEffect, useMemo } from "react"
 import { BREAKPOINT_PARAM_ID } from "@/const/state"
 
@@ -195,7 +195,7 @@ export const useBreakpoints = (api: API, onUpdate: (data: UseBreakpointsReturn, 
 
     const select = useCallback((name: keyof typeof options | (string & {})) => {
         if (name in options) {
-            update(options[name as keyof typeof options])
+            update(options[name])
             return
         }
         reset()
