@@ -1,4 +1,4 @@
-@use "../tokens/tokens" as *;
+@use "sass:map";
 
 @mixin selected($_selector) {
     #{$_selector}:global(.selected) { @content; }

@@ -1,4 +1,5 @@
-@use "../tokens/tokens" as *;
+@use "sass:map";
+
 @use "aspect" as *;
 
 $v-fontFamily: var(--font-family, "Open Sans", sans-serif);

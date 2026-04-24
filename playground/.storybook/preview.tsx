@@ -1,14 +1,21 @@
 import type { Preview } from "@storybook/react-vite"
 import { StrictMode } from "react"
+import { themes } from "~/assets/scss"
 
-import "../../src/assets/scss/global.scss"
+import "~/assets/scss/global.scss"
 
 const preview: Preview = {
     parameters: {
         backgrounds: {
             options: {
-                light: { name: "Light", value: "#fff" },
-                dark: { name: "Dark", value: "#000" },
+                light: {
+                    name: "Light",
+                    value: themes.light.bgIdle,
+                },
+                dark: {
+                    name: "Dark",
+                    value: themes.dark.bgIdle,
+                },
             },
         },
         controls: {
@@ -21,7 +28,9 @@ const preview: Preview = {
             test: "todo",
         },
         initialGlobals: {
-            backgrounds: { value: "light" },
+            backgrounds: {
+                value: "light",
+            },
         },
     },
     decorators: [

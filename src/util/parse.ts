@@ -1,4 +1,4 @@
-import type { JSONValue, Obj } from "@/types/util"
+import type { JSONValue, Obj } from "@/types"
 import { isPrimitive, isString } from "./helpers"
 
 export function fromJson<T extends JSONValue>(json: string): T {

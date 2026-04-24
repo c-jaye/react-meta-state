@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react-vite"
-import { generateStateStory } from "playground/util/storyTools"
-import { unit } from "@/assets/tokens"
+import { generateStateStory } from "~/util/storyTools"
+import { unit } from "~/assets/scss"
 import { useState } from "react"
 
 import DropdownListItem from "."
@@ -17,6 +17,7 @@ const meta: Meta<typeof DropdownListItem> = {
     },
     render: (args) => {
         const [value, setValue] = useState("")
+
         return (
             <div style={{
                 overflow: "visible",

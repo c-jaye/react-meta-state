@@ -1,6 +1,8 @@
 @use "sass:map";
 
-@use "../main" as *;
+@use "../abstracts/aspect" as *;
+@use "../vars/vars" as *;
+$const-aspects: () !default;
 
 @mixin buildAspects {
 	--aspect-unit: #{$v-aspectUnit};

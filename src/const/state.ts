@@ -1,4 +1,4 @@
-import type { ComponentState } from "@/types/com"
+import type { ComponentState } from "@/types"
 
 export const STATE_ADDON_ID = "react-meta-state-state"
 export const STATE_TOOL_ID = `${STATE_ADDON_ID}/tool`
